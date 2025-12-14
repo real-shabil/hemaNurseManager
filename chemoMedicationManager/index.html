@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medication Manager (Offline)</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <header>
+        <div class="header-container">
+            <h1>Chemo Medication Manager</h1>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <!-- Sidebar / Navigation -->
+        <aside class="sidebar">
+            <div class="card" style="margin-bottom: 20px;">
+                <h3>📂 Load Data</h3>
+                <p style="font-size:0.85rem; color:#666; margin-bottom:10px;">Select your
+                    <code>chemoMedications.json</code> file.
+                </p>
+                <input type="file" id="jsonFileInput" accept=".json" class="form-control" style="font-size:0.8rem;">
+            </div>
+
+            <div class="card" id="navCard" style="opacity: 0.5; pointer-events: none;">
+                <h3>Categories</h3>
+                <ul id="categoryList">
+                    <!-- Populated by JS -->
+                </ul>
+            </div>
+
+            <div class="card" style="margin-top: 20px;">
+                <button class="btn btn-success" id="downloadBtn" disabled>💾 Download JSON</button>
+                <p class="save-status" id="saveStatus"></p>
+                <p style="font-size:0.8rem; color:#666; margin-top:5px;">
+                    Saves <code>updated_chemoMedications.json</code> to your downloads.
+                </p>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <section class="content">
+            <div id="welcomeView">
+                <div class="card empty-state" style="text-align:center; padding: 40px;">
+                    <h2>Welcome</h2>
+                    <p>Please load a valid JSON file on the left to manage chemotherapy medications.</p>
+                </div>
+            </div>
+
+            <div id="categoryView" hidden>
+                <div class="view-header">
+                    <h2 id="currentCategoryTitle">Category</h2>
+                    <div>
+                        <button class="btn btn-primary" id="addDrugBtn">+ Add Drug</button>
+                    </div>
+                </div>
+
+                <div class="category-block">
+                    <p id="currentCategoryDesc" class="category-description"></p>
+                    <div id="drugsContainer">
+                        <!-- Drugs loaded here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Drug Edit Modal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <h3 id="modalTitle">Edit Drug</h3>
+            <div id="modalBody">
+                <div class="form-group">
+                    <label>Drug Name</label>
+                    <input type="text" id="editName" class="form-control">
+                </div>
+
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px;">
+                    <div class="form-group">
+                        <label>Classification</label>
+                        <input type="text" id="editClass" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Route</label>
+                        <input type="text" id="editRoute" class="form-control">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Extravasation Risk</label>
+                    <select id="editRisk" class="form-control">
+                        <option value="Non-vesicant">Non-vesicant</option>
+                        <option value="Irritant">Irritant</option>
+                        <option value="Vesicant">Vesicant</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Mechanism (One per line)</label>
+                    <textarea id="editMechanism" class="form-control"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Indications (One per line)</label>
+                    <textarea id="editIndications" class="form-control"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Side Effects (One per line)</label>
+                    <textarea id="editSideEffects" class="form-control"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Monitoring (One per line)</label>
+                    <textarea id="editMonitoring" class="form-control"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Warnings (One per line)</label>
+                    <textarea id="editWarnings" class="form-control"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Nursing Info (One per line)</label>
+                    <textarea id="editNursingInfo" class="form-control"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Source</label>
+                    <input type="text" id="editSource" class="form-control">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-ghost" id="closeModalBtn">Cancel</button>
+                <button class="btn btn-primary" id="saveModalBtn">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+    <footer class="portal-footer">
+        © Hema Nurse Aid Project 2025
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protocol Admin (Offline)</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <header>
+        <div class="header-container">
+            <h1>Chemo Protocol Manager</h1>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <!-- Sidebar / Navigation -->
+        <aside class="sidebar">
+            <div class="card" style="margin-bottom: 20px;">
+                <h3>📂 Load Data</h3>
+                <p style="font-size:0.85rem; color:#666; margin-bottom:10px;">Select your
+                    <code>chemoProtocols.json</code> file to begin.
+                </p>
+                <input type="file" id="jsonFileInput" accept=".json" class="form-control" style="font-size:0.8rem;">
+            </div>
+
+            <div class="card" id="navCard" style="opacity: 0.5; pointer-events: none;">
+                <h3>Diseases</h3>
+                <ul id="diseaseList">
+                    <!-- Populated by JS -->
+                </ul>
+                <button class="btn btn-primary" id="addDiseaseBtn">+ Add Disease</button>
+            </div>
+
+            <div class="card" style="margin-top: 20px;">
+                <button class="btn btn-success" id="downloadBtn" disabled>💾 Download JSON</button>
+                <p class="save-status" id="saveStatus"></p>
+                <p style="font-size:0.8rem; color:#666; margin-top:5px;">
+                    Saves <code>updated_chemoProtocols.json</code> to your downloads.
+                </p>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <section class="content">
+            <div id="welcomeView">
+                <div class="card empty-state" style="text-align:center; padding: 40px;">
+                    <h2 id="welcomeTitle">Welcome</h2>
+                    <p id="welcomeText">Please load a valid JSON file on the left to manage chemotherapy protocols.</p>
+                </div>
+            </div>
+
+            <div id="diseaseView" hidden>
+                <div class="view-header">
+                    <h2 id="currentDiseaseTitle">Disease</h2>
+                    <div>
+                        <button class="btn btn-secondary" id="addPhaseBtn">+ Add Phase</button>
+                        <button class="btn btn-danger-outline" id="deleteDiseaseBtn">Delete Disease</button>
+                    </div>
+                </div>
+
+                <div id="phasesContainer">
+                    <!-- Phases loaded here -->
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Generic Modal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <h3 id="modalTitle">Edit Item</h3>
+            <div id="modalBody"></div>
+            <div class="modal-footer">
+                <button class="btn btn-ghost" id="closeModalBtn">Cancel</button>
+                <button class="btn btn-primary" id="saveModalBtn">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+    <footer class="portal-footer">
+        © Hema Nurse Aid Project 2025
+    </footer>
+</body>
+
+</html>

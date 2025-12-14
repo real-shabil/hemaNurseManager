@@ -1,0 +1,355 @@
+:root {
+    --primary: #004d40;
+    /* Teal 900 */
+    --primary-light: #e0f2f1;
+    /* Teal 50 */
+    --secondary: #00796b;
+    /* Teal 700 */
+    --accent: #d63384;
+    /* Pink 600 */
+    --bg: #f4f6f8;
+    --card-bg: #ffffff;
+    --text: #333333;
+    --border: #e0e0e0;
+    --risk: #dc3545;
+    --success: #28a745;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    color: var(--text);
+    background-color: var(--bg);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    background: var(--primary);
+    color: white;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h1,
+h2,
+h3 {
+    margin: 0;
+}
+
+h1 {
+    font-size: 1.5rem;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    width: 100%;
+    flex: 1;
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 2rem;
+}
+
+/* Sidebar */
+.card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    padding: 1.5rem;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+}
+
+.sidebar li {
+    padding: 10px 12px;
+    margin-bottom: 4px;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background 0.2s;
+    font-weight: 500;
+}
+
+.sidebar li:hover {
+    background: var(--bg);
+}
+
+.sidebar li.active {
+    background: var(--primary-light);
+    color: var(--primary);
+    font-weight: 700;
+}
+
+/* Content */
+.view-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.category-block {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border);
+}
+
+.category-description {
+    color: #666;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.drug-item {
+    background: #fafafa;
+    border: 1px solid #eee;
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.drug-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.drug-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 6px;
+}
+
+.drug-name {
+    font-weight: 700;
+    color: #0056b3;
+    font-size: 1.1rem;
+}
+
+.drug-meta {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 4px;
+}
+
+.badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    background: #e0e0e0;
+    color: #333;
+}
+
+.badge-vesicant {
+    background: #ffcdd2;
+    color: #c62828;
+}
+
+.badge-irritant {
+    background: #fff9c4;
+    color: #f57f17;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal.open {
+    display: flex;
+}
+
+.modal-content {
+    background: white;
+    padding: 24px;
+    border-radius: 12px;
+    width: 700px;
+    max-width: 90%;
+    max-height: 85vh;
+    overflow-y: auto;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 20px;
+    padding-top: 12px;
+    border-top: 1px solid #eee;
+}
+
+/* Forms */
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-family: inherit;
+    box-sizing: border-box;
+}
+
+textarea.form-control {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* Buttons */
+.btn {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: var(--secondary);
+}
+
+.btn-secondary {
+    background: #e0e0e0;
+    color: #333;
+}
+
+.btn-secondary:hover {
+    background: #d0d0d0;
+}
+
+.btn-success {
+    background: var(--success);
+    color: white;
+}
+
+.btn-success:hover {
+    background: #218838;
+}
+
+.btn-danger-outline {
+    background: transparent;
+    border: 1px solid var(--risk);
+    color: var(--risk);
+}
+
+.btn-danger-outline:hover {
+    background: #fff0f0;
+}
+
+.btn-ghost {
+    background: transparent;
+    color: #666;
+}
+
+.btn-sm {
+    padding: 5px 10px;
+    font-size: 0.8rem;
+}
+
+.save-status {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    text-align: center;
+    color: var(--success);
+    height: 20px;
+}
+
+/* Mobile Responsiveness & Rich Aesthetics Enhancements */
+body {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh;
+}
+
+.card,
+.category-block,
+.modal-content {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+}
+
+header {
+    background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+}
+
+.portal-footer {
+    margin-top: 4rem;
+    margin-bottom: 3rem;
+    color: #9ca3af;
+    font-size: 0.875rem;
+    text-align: center;
+}
+
+@media (max-width: 600px) {
+    .container {
+        grid-template-columns: 1fr;
+        padding: 0 16px;
+    }
+
+    .sidebar {
+        position: relative;
+        z-index: 10;
+        margin-bottom: 20px;
+    }
+
+    .modal-content {
+        width: 95%;
+        max-height: 90vh;
+        padding: 16px;
+    }
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background: #ccc !important;
+    color: #666 !important;
+}

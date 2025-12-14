@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drug Interaction Manager</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <header>
+        <div class="header-container">
+            <h1>Drug Interaction Manager</h1>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="card" style="margin-bottom: 20px;">
+                <h3>📂 Load Data</h3>
+                <p style="font-size:0.85rem; color:#666; margin-bottom:10px;">Select your
+                    <code>drugInteractions.json</code> file.
+                </p>
+                <input type="file" id="jsonFileInput" accept=".json" class="form-control" style="font-size:0.8rem;">
+            </div>
+
+            <div class="card">
+                <h3>Actions</h3>
+                <button class="btn btn-primary" id="addInteractionBtn" style="width:100%; margin-bottom:10px;"
+                    disabled>+ Add Interaction</button>
+                <button class="btn btn-success" id="downloadBtn" style="width:100%;" disabled>💾 Download JSON</button>
+                <p id="saveStatus" class="save-status"></p>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <section class="content">
+            <div id="welcomeView">
+                <div class="card empty-state" style="text-align:center; padding: 40px;">
+                    <h2>Welcome</h2>
+                    <p>Please load a valid JSON file on the left to manage drug interactions.</p>
+                </div>
+            </div>
+
+            <div id="mainView" hidden>
+                <div class="view-header">
+                    <h2>Interactions List</h2>
+                    <input type="text" id="searchInput" class="form-control" placeholder="Search drug names..."
+                        style="width: 300px;">
+                </div>
+
+                <div class="card" style="padding:0; overflow:hidden;">
+                    <table class="interaction-table">
+                        <thead>
+                            <tr>
+                                <th>Drug Pair</th>
+                                <th>Severity</th>
+                                <th>Mechanism</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="interactionsTableBody">
+                            <!-- Rows loaded here -->
+                        </tbody>
+                    </table>
+                    <div id="noResults" style="padding:20px; text-align:center; color:#666; display:none;">No
+                        interactions found matching your search.</div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Modal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <h3 id="modalTitle">Edit Interaction</h3>
+            <div id="modalBody">
+                <div class="form-group" style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+                    <div>
+                        <label>Drug A</label>
+                        <input type="text" id="inputDrugA" class="form-control" placeholder="e.g. Acyclovir"
+                            list="drugList">
+                    </div>
+                    <div>
+                        <label>Drug B</label>
+                        <input type="text" id="inputDrugB" class="form-control" placeholder="e.g. D5W" list="drugList">
+                    </div>
+                </div>
+
+                <datalist id="drugList">
+                    <!-- Populated by JS -->
+                </datalist>
+
+                <div class="form-group">
+                    <label style="margin-bottom:8px; display:block;">Compatibility Data</label>
+                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+                        <div>
+                            <label style="font-size:0.8rem; color:#666;">Y-Site</label>
+                            <select id="inputYSite" class="form-control compat-select">
+                                <option value="">No Data</option>
+                                <option value="Compatible">Compatible</option>
+                                <option value="Incompatible">Incompatible</option>
+                                <option value="Variable">Variable</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label style="font-size:0.8rem; color:#666;">Admixture</label>
+                            <select id="inputAdmixture" class="form-control compat-select">
+                                <option value="">No Data</option>
+                                <option value="Compatible">Compatible</option>
+                                <option value="Incompatible">Incompatible</option>
+                                <option value="Variable">Variable</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label style="font-size:0.8rem; color:#666;">Syringe</label>
+                            <select id="inputSyringe" class="form-control compat-select">
+                                <option value="">No Data</option>
+                                <option value="Compatible">Compatible</option>
+                                <option value="Incompatible">Incompatible</option>
+                                <option value="Variable">Variable</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label style="font-size:0.8rem; color:#666;">Solution</label>
+                            <select id="inputSolution" class="form-control compat-select">
+                                <option value="">No Data</option>
+                                <option value="Compatible">Compatible</option>
+                                <option value="Incompatible">Incompatible</option>
+                                <option value="Variable">Variable</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Generated Clinical Note</label>
+                    <textarea id="inputNote" class="form-control" style="background:#f9f9f9;"
+                        placeholder="Auto-generated based on selections above..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Source</label>
+                    <input type="text" id="inputSource" class="form-control" value="Trissel’s Handbook 2025">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-ghost" id="closeModalBtn">Cancel</button>
+                <button class="btn btn-primary" id="saveModalBtn">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+
+    <footer class="portal-footer">
+        © Hema Nurse Aid Project 2025
+    </footer>
+</body>
+
+</html>
