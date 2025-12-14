@@ -273,6 +273,10 @@ button:disabled {
         grid-template-columns: 1fr;
     }
 
+    .content {
+        order: -1;
+    }
+
     .sidebar {
         margin-bottom: 20px;
     }

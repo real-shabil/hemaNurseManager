@@ -362,6 +362,10 @@ header {
         padding: 0 16px;
     }
 
+    .content {
+        order: -1;
+    }
+
     .sidebar {
         position: relative;
         z-index: 10;
