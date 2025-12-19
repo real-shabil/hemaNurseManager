@@ -8,7 +8,7 @@
                     "drugs": [
                         {
                             "phase": "Pre-Chemo",
-                            "day": "Day 1",
+                            "day": "Day 1 -7",
                             "name": "Ondansetron",
                             "dose": "8 mg",
                             "route": "IV",
@@ -16,7 +16,7 @@
                         },
                         {
                             "phase": "Pre-Chemo",
-                            "day": "Day 1",
+                            "day": "Day 1 - 10",
                             "name": "Prednisolone eye drops",
                             "dose": "1 drop each eye",
                             "route": "Eye drops",
@@ -37,21 +37,12 @@
                             "dose": "100 mg/m²/day",
                             "route": "IV continuous infusion",
                             "duration": "24 hours"
-                        },
-                        {
-                            "phase": "Post-Chemo",
-                            "day": "Day 8",
-                            "name": "Filgrastim",
-                            "dose": "5 mcg/kg",
-                            "route": "SC",
-                            "duration": "Continue until ANC ≥ 1000 two consective days"
                         }
                     ],
                     "NursesInfo": [
-                        "Indication: AML induction",
-                        "Administer anthracycline (Daunorubicin/Idarubicin) only after completion of the previous day's Cytarabine infusion.",
-                        "Use central venous line (PICC/CVC) for Idarubicin or Daunorubicin— avoid peripheral veins.",
-                        "Side effects: \"Cytarabine syndrome\", \"Tumour lysis syndrome\", Nausea and Vomiting"
+                        "Administer anthracycline (Daunorubicin / Idarubicin) only after completion of the previous day's Cytarabine infusion.",
+                        "Hydrate well during chemotherapy administration",
+                        "Use central venous line (PICC/CVC) for Idarubicin / Daunorubicin -  avoid peripheral veins."
                     ],
                     "source": "Hospital Protocol"
                 },
@@ -63,35 +54,39 @@
                             "name": "Filgrastim (G-CSF)",
                             "dose": "5 mcg/kg or 480 mcg / day",
                             "route": "Subcutaneus",
-                            "duration": "Continue until ANC ≥ 1000 two consective days"
+                            "duration": "Continue until ANC ≥ 1000 two consective days",
+                            "phase": "Pre-Chemo"
                         },
                         {
                             "day": "Days 2–4",
                             "name": "Idarubicin",
                             "dose": "10 mg/m²/day over 10-15 min",
                             "route": "IV",
-                            "duration": ""
+                            "duration": "",
+                            "phase": "Chemo"
                         },
                         {
                             "day": "Days 2–6",
                             "name": "Fludarabine",
                             "dose": "30 mg/m²/day over 30 min",
                             "route": "IV infusion",
-                            "duration": ""
+                            "duration": "",
+                            "phase": "Chemo"
                         },
                         {
                             "day": "Days 2–6",
                             "name": "Cytarabine",
                             "dose": "2 g/m²/day over 4 hours",
                             "route": "IV infusion",
-                            "duration": "4 hours after Fluderabine"
+                            "duration": "4 hours after Fluderabine",
+                            "phase": "Chemo"
                         }
                     ],
                     "NursesInfo": [
-                        "Indication: High-risk AML: adverse cytogenetics, TP53 mutation, secondary AML (sAML/t-AML), FLT3-ITD high ratio, hyperleukocytosis, transplant-intent patients",
-                        "Side effects: \"Cytarabine syndrome\", \"Tumour lysis syndrome\", Cytarabine induced neurotoxicity, Nausea and Vomiting"
+                        "GCSF continue until ANC > 1000 in 2 consecutive days",
+                        "Hydrate well (Oral / IVF ) during chemotherapy administration"
                     ],
-                    "source": "Local Hospital Protocol"
+                    "source": "Hospital Protocol"
                 }
             ]
         },
@@ -106,14 +101,15 @@
                             "name": "Cytarabine (Ara-C)",
                             "dose": "1.5 g/m² over 3 hours every 12 hours",
                             "route": "IV infusion",
-                            "duration": "28 days or after BM recovey. 2 to 4 cycles"
+                            "duration": "28 days or after BM recovey. 2 to 4 cycles",
+                            "phase": "Chemo"
                         }
                     ],
                     "NursesInfo": [
                         "Indication: AML in remission in patients who are under 60 years of age.",
                         "Side effects: \"Cytarabine syndrome\", \"Tumour lysis syndrome\", Cytarabine induced neurotoxicity, Nausea and Vomiting"
                     ],
-                    "source": "Local Hospital Protocol"
+                    "source": "Hospital Protocol"
                 },
                 {
                     "protocolName": "Cytarabine (age 60 years and over)",
@@ -123,14 +119,15 @@
                             "name": "Cytarabine (Ara-C)",
                             "dose": "1 g/m² over 3 hours every 12 hours",
                             "route": "IV infusion",
-                            "duration": "28 days or after BM recovey. 2 to 4 cycles"
+                            "duration": "28 days or after BM recovey. 2 to 4 cycles",
+                            "phase": "Chemo"
                         }
                     ],
                     "NursesInfo": [
                         "Indication: AML in remission in patients who are aged 60 years aand over.",
                         "Side effects: \"Cytarabine syndrome\", \"Tumour lysis syndrome\", Cytarabine induced neurotoxicity, Nausea and Vomiting"
                     ],
-                    "source": "Local Hospital Protocol"
+                    "source": "Hospital Protocol"
                 },
                 {
                     "protocolName": "HiDAC-High dose Cytarabine (Ara-c)",
@@ -138,16 +135,17 @@
                         {
                             "day": "Days 1, 3, 5",
                             "name": "Cytarabine (Ara-C)",
-                            "dose": "3 g/m² over 3 hours every 12 hours",
+                            "dose": "3 g/m² over 3 hours Q 12 hours",
                             "route": "IV infusion",
-                            "duration": "28 days or after BM recovey. 3 cycles"
+                            "duration": "28 days or after BM recovey. 3 cycles",
+                            "phase": "Chemo"
                         }
                     ],
                     "NursesInfo": [
-                        "Indication: AML in remission in patients who are under 60 years of age.",
-                        "Side effects: \"Cytarabine syndrome\", \"Tumour lysis syndrome\", Cytarabine induced neurotoxicity, Nausea and Vomiting"
+                        "Hydrate well (Oral / IVF) during chemotherapy administration.",
+                        "Side effects: \"Cytarabine syndrome\", \"Tumour lysis syndrome\", Cytarabine induced neurotoxicity, Nausea and Vomiting."
                     ],
-                    "source": "Local Hospital Protocol"
+                    "source": "Hospital Protocol"
                 }
             ]
         },
@@ -158,11 +156,12 @@
                     "protocolName": "Azacitidine Oral",
                     "drugs": [
                         {
-                            "day": "Days 1–14 of each 28-days",
+                            "day": "Days 1–14",
                             "name": "Azacitidine ",
                             "dose": "300 mg Daily for 14 days",
                             "route": "Oral",
-                            "duration": "Continous until disease progression orunacceptable toxicity."
+                            "duration": "Continous until disease progression orunacceptable toxicity.",
+                            "phase": "Chemo"
                         }
                     ],
                     "NursesInfo": [
@@ -170,17 +169,18 @@
                         "Nausea, vomiting, and diarrhea are common.",
                         "The oral formulation of azacitidine is not interchangeable with injectable formulation"
                     ],
-                    "source": "Local Hospital Protocol"
+                    "source": "https://tinyurl.com/2s8frs5x"
                 },
                 {
                     "protocolName": "Azacitidine SC",
                     "drugs": [
                         {
-                            "day": "Days 1–7 of each 28-days",
+                            "day": "Days 1 –7 ",
                             "name": "Azacitidine",
                             "dose": "75 mg/m²",
                             "route": "SC",
-                            "duration": "6 cycles minimum, then continue until disease progression."
+                            "duration": "6 cycles minimum, then continue until disease progression.",
+                            "phase": "Chemo"
                         }
                     ],
                     "NursesInfo": [
@@ -188,7 +188,7 @@
                         "Nausea, vomiting, and diarrhea are common.",
                         "Can also be administered as IV"
                     ],
-                    "source": "Local Hospital Protocol"
+                    "source": "Hospital Protocol"
                 },
                 {
                     "protocolName": "Low-Dose Cytarabine (Ara-C)",
@@ -221,33 +221,46 @@
                             "name": "Filgrastim (G-CSF)",
                             "dose": "5 mcg/kg or 480 mcg / day",
                             "route": "Subcutaneus",
-                            "duration": "Continue until ANC ≥ 1000 two consective days"
+                            "duration": "Continue until ANC ≥ 1000 two consective days",
+                            "phase": "Pre-Chemo"
                         },
                         {
-                            "day": "Days 2–4",
+                            "day": "Days 2 – 4",
                             "name": "Idarubicin",
                             "dose": "10 mg/m²/day over 10-15 min",
                             "route": "IV",
-                            "duration": ""
+                            "duration": "",
+                            "phase": "Chemo"
                         },
                         {
-                            "day": "Days 2–6",
+                            "day": "Days 2 – 6",
                             "name": "Fludarabine",
                             "dose": "30 mg/m²/day over 30 min",
                             "route": "IV infusion",
-                            "duration": ""
+                            "duration": "",
+                            "phase": "Chemo"
                         },
                         {
-                            "day": "Days 2–6",
+                            "day": "Days 2 – 6 4 hours after Fluderabine",
                             "name": "Cytarabine",
                             "dose": "2 g/m²/day over 4 hours",
-                            "route": "IV infusion",
-                            "duration": "4 hours after Fluderabine"
+                            "route": "IV over 4 hours",
+                            "duration": "4 hours after Fluderabine",
+                            "phase": "Chemo"
+                        },
+                        {
+                            "name": "Prednisolone Eye Drops",
+                            "dose": "1 drop each eye",
+                            "route": "Eye drop",
+                            "phase": "Pre-Chemo",
+                            "day": "Day 2 - D1 0"
                         }
                     ],
                     "NursesInfo": [
-                        "Indication: High-risk AML: adverse cytogenetics, TP53 mutation, secondary AML (sAML/t-AML), FLT3-ITD high ratio, hyperleukocytosis, transplant-intent patients",
-                        "Side effects: \"Cytarabine syndrome\", \"Tumour lysis syndrome\", Cytarabine induced neurotoxicity, Nausea and Vomiting"
+                        "Prednisolone eye drope start 2 hours before the first dose of Cyatarabine.",
+                        "Orange/Yellow urine for 48 hours after Idarubicin.",
+                        "Boney pain after GCSF administration.",
+                        "Side effects: \"Cytarabine syndrome\", \"Tumour lysis syndrome\", Cytarabine induced neurotoxicity, Nausea and Vomiting."
                     ],
                     "source": "Local Hospital Protocol"
                 },
@@ -259,21 +272,31 @@
                             "name": "Mitoxantrone",
                             "dose": "6 mg/m²",
                             "route": "IV over 30 min",
-                            "duration": ""
+                            "duration": "",
+                            "phase": "Chemo"
                         },
                         {
                             "day": "Days 1–6",
                             "name": "Etoposide",
                             "dose": "80 mg/m²",
                             "route": "IV over 1 hours",
-                            "duration": ""
+                            "duration": "",
+                            "phase": "Chemo"
                         },
                         {
                             "day": "Days 1–5",
                             "name": "Cytarabine",
                             "dose": "1 g/m² TWICE daily",
                             "route": "IV over 3 hours",
-                            "duration": "Cycle length 28 days"
+                            "duration": "Cycle length 28 days",
+                            "phase": "Chemo"
+                        },
+                        {
+                            "name": "Allopurinol",
+                            "dose": "300mg",
+                            "route": "PO",
+                            "phase": "Pre-Chemo",
+                            "day": "Day 1 - 14"
                         }
                     ],
                     "NursesInfo": [
