@@ -114,7 +114,7 @@ function showWelcome(msg) {
 function renderDiseaseView(diseaseKey) {
     document.getElementById('welcomeView').setAttribute('hidden', '');
     document.getElementById('diseaseView').removeAttribute('hidden');
-   document.getElementById('currentDiseaseTitle').textContent = diseaseKey;
+    document.getElementById('currentDiseaseTitle').textContent = diseaseKey;
 
     const container = document.getElementById('phasesContainer');
     container.innerHTML = '';
@@ -307,6 +307,7 @@ function renderDrugsList(drugs) {
     drugs.forEach((d, i) => {
         const row = document.createElement('div');
         row.className = 'drug-edit-item';
+        // Add specific note field in a new row for visibility
         row.innerHTML = `
             <input type="text" placeholder="Name" class="form-control" value="${d.name || ''}" onchange="updateDrug(${i}, 'name', this.value)">
             <input type="text" placeholder="Dose" class="form-control" value="${d.dose || ''}" onchange="updateDrug(${i}, 'dose', this.value)">
@@ -319,6 +320,7 @@ function renderDrugsList(drugs) {
                 <option value="Post-Chemo" ${d.phase === 'Post-Chemo' ? 'selected' : ''}>Post-Chemo</option>
                 <option value="Other" ${!['Pre-Chemo', 'Chemo', 'Post-Chemo'].includes(d.phase) ? 'selected' : ''}>Other</option>
             </select>
+            <input type="text" placeholder="Specific Note (e.g. Check pH > 7)" class="form-control" style="grid-column: 1 / -1" value="${d.note || ''}" onchange="updateDrug(${i}, 'note', this.value)">
         `;
         container.appendChild(row);
     });
@@ -328,7 +330,7 @@ function renderDrugsList(drugs) {
 window.addDrugRow = () => {
     if (!currentEditContext) return;
     currentEditContext.protocol.drugs = currentEditContext.protocol.drugs || [];
-    currentEditContext.protocol.drugs.push({ name: "", dose: "", route: "", phase: "Chemo", day: "" });
+    currentEditContext.protocol.drugs.push({ name: "", dose: "", route: "", phase: "Chemo", day: "", note: "" });
     renderDrugsList(currentEditContext.protocol.drugs);
 };
 

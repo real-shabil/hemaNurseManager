@@ -12,7 +12,8 @@
                             "name": "Ondansetron",
                             "dose": "8 mg",
                             "route": "IV",
-                            "duration": "15 min"
+                            "duration": "15 min",
+                            "note": ""
                         },
                         {
                             "phase": "Pre-Chemo",
@@ -20,7 +21,8 @@
                             "name": "Prednisolone eye drops",
                             "dose": "1 drop each eye",
                             "route": "Eye drops",
-                            "duration": "2 hours before Cytarabine"
+                            "duration": "2 hours before Cytarabine",
+                            "note": ""
                         },
                         {
                             "phase": "Chemo",
@@ -28,7 +30,8 @@
                             "name": "Daunorubicin or Idarubicin",
                             "dose": "60 mg/m²/day over 5-15 min or 12 mg/m²/day over 10-15 min",
                             "route": "IV",
-                            "duration": "3 days"
+                            "duration": "3 days",
+                            "note": ""
                         },
                         {
                             "phase": "Chemo",
@@ -36,7 +39,8 @@
                             "name": "Cytarabine (Ara-C)",
                             "dose": "100 mg/m²/day",
                             "route": "IV continuous infusion",
-                            "duration": "24 hours"
+                            "duration": "24 hours",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -55,7 +59,8 @@
                             "dose": "5 mcg/kg or 480 mcg / day",
                             "route": "Subcutaneus",
                             "duration": "Continue until ANC ≥ 1000 two consective days",
-                            "phase": "Pre-Chemo"
+                            "phase": "Pre-Chemo",
+                            "note": ""
                         },
                         {
                             "day": "Days 2–4",
@@ -63,7 +68,8 @@
                             "dose": "10 mg/m²/day over 10-15 min",
                             "route": "IV",
                             "duration": "",
-                            "phase": "Chemo"
+                            "phase": "Chemo",
+                            "note": ""
                         },
                         {
                             "day": "Days 2–6",
@@ -71,7 +77,8 @@
                             "dose": "30 mg/m²/day over 30 min",
                             "route": "IV infusion",
                             "duration": "",
-                            "phase": "Chemo"
+                            "phase": "Chemo",
+                            "note": ""
                         },
                         {
                             "day": "Days 2–6",
@@ -79,7 +86,8 @@
                             "dose": "2 g/m²/day over 4 hours",
                             "route": "IV infusion",
                             "duration": "4 hours after Fluderabine",
-                            "phase": "Chemo"
+                            "phase": "Chemo",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -102,7 +110,8 @@
                             "dose": "1.5 g/m² over 3 hours every 12 hours",
                             "route": "IV infusion",
                             "duration": "28 days or after BM recovey. 2 to 4 cycles",
-                            "phase": "Chemo"
+                            "phase": "Chemo",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -120,7 +129,8 @@
                             "dose": "1 g/m² over 3 hours every 12 hours",
                             "route": "IV infusion",
                             "duration": "28 days or after BM recovey. 2 to 4 cycles",
-                            "phase": "Chemo"
+                            "phase": "Chemo",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -138,7 +148,8 @@
                             "dose": "3 g/m² over 3 hours Q 12 hours",
                             "route": "IV infusion",
                             "duration": "28 days or after BM recovey. 3 cycles",
-                            "phase": "Chemo"
+                            "phase": "Chemo",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -161,7 +172,8 @@
                             "dose": "300 mg Daily for 14 days",
                             "route": "Oral",
                             "duration": "Continous until disease progression orunacceptable toxicity.",
-                            "phase": "Chemo"
+                            "phase": "Chemo",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -180,7 +192,8 @@
                             "dose": "75 mg/m²",
                             "route": "SC",
                             "duration": "6 cycles minimum, then continue until disease progression.",
-                            "phase": "Chemo"
+                            "phase": "Chemo",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -198,7 +211,8 @@
                             "name": "Cytarabine (Ara-C)",
                             "dose": "20 mg TWICE a day",
                             "route": "Subcutaneus",
-                            "duration": "Continuous until disease progression or unacceptable toxicity."
+                            "duration": "Continuous until disease progression or unacceptable toxicity.",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -222,7 +236,8 @@
                             "dose": "5 mcg/kg or 480 mcg / day",
                             "route": "Subcutaneus",
                             "duration": "Continue until ANC ≥ 1000 two consective days",
-                            "phase": "Pre-Chemo"
+                            "phase": "Pre-Chemo",
+                            "note": ""
                         },
                         {
                             "day": "Days 2 – 4",
@@ -230,7 +245,8 @@
                             "dose": "10 mg/m²/day over 10-15 min",
                             "route": "IV",
                             "duration": "",
-                            "phase": "Chemo"
+                            "phase": "Chemo",
+                            "note": ""
                         },
                         {
                             "day": "Days 2 – 6",
@@ -238,7 +254,8 @@
                             "dose": "30 mg/m²/day over 30 min",
                             "route": "IV infusion",
                             "duration": "",
-                            "phase": "Chemo"
+                            "phase": "Chemo",
+                            "note": ""
                         },
                         {
                             "day": "Days 2 – 6 4 hours after Fluderabine",
@@ -246,14 +263,16 @@
                             "dose": "2 g/m²/day over 4 hours",
                             "route": "IV over 4 hours",
                             "duration": "4 hours after Fluderabine",
-                            "phase": "Chemo"
+                            "phase": "Chemo",
+                            "note": ""
                         },
                         {
                             "name": "Prednisolone Eye Drops",
                             "dose": "1 drop each eye",
                             "route": "Eye drop",
                             "phase": "Pre-Chemo",
-                            "day": "Day 2 - D1 0"
+                            "day": "Day 2 - D1 0",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -273,7 +292,8 @@
                             "dose": "6 mg/m²",
                             "route": "IV over 30 min",
                             "duration": "",
-                            "phase": "Chemo"
+                            "phase": "Chemo",
+                            "note": ""
                         },
                         {
                             "day": "Days 1–6",
@@ -281,7 +301,8 @@
                             "dose": "80 mg/m²",
                             "route": "IV over 1 hours",
                             "duration": "",
-                            "phase": "Chemo"
+                            "phase": "Chemo",
+                            "note": ""
                         },
                         {
                             "day": "Days 1–5",
@@ -289,14 +310,16 @@
                             "dose": "1 g/m² TWICE daily",
                             "route": "IV over 3 hours",
                             "duration": "Cycle length 28 days",
-                            "phase": "Chemo"
+                            "phase": "Chemo",
+                            "note": ""
                         },
                         {
                             "name": "Allopurinol",
                             "dose": "300mg",
                             "route": "PO",
                             "phase": "Pre-Chemo",
-                            "day": "Day 1 - 14"
+                            "day": "Day 1 - 14",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -314,28 +337,32 @@
                             "name": "Filgrastim (G-CSF)",
                             "dose": "5 µg/kg/day",
                             "route": "SC",
-                            "duration": "Start 24 h pre-chemo"
+                            "duration": "Start 24 h pre-chemo",
+                            "note": ""
                         },
                         {
                             "day": "Days 2-4",
                             "name": "Mitoxantrone",
                             "dose": "10 mg/m²/day",
                             "route": "IV",
-                            "duration": "15–30 min"
+                            "duration": "15–30 min",
+                            "note": ""
                         },
                         {
                             "day": "Days 2-6",
                             "name": "Cladribine",
                             "dose": "5 mg/m²/day",
                             "route": "IV",
-                            "duration": "over 2 hours"
+                            "duration": "over 2 hours",
+                            "note": ""
                         },
                         {
                             "day": "Days 2-6",
                             "name": "Cytarabine (Ara-C)",
                             "dose": "2 g/m²/day",
                             "route": "IV infusion",
-                            "duration": "Start 2 hours after Cladrabine finishes, over 4 hours "
+                            "duration": "Start 2 hours after Cladrabine finishes, over 4 hours ",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -360,14 +387,16 @@
                             "name": "Ponatinib",
                             "dose": "30 mg daily",
                             "route": "Oral",
-                            "duration": "Continuous"
+                            "duration": "Continuous",
+                            "note": ""
                         },
                         {
                             "day": "Cycle 1–2",
                             "name": "Blinatumomab",
                             "dose": "9 mcg/day → 28 mcg/day",
                             "route": "IV",
-                            "duration": "28 days continuous infusion"
+                            "duration": "28 days continuous infusion",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -383,14 +412,16 @@
                             "name": "BFM protocol drugs",
                             "dose": "Per schedule",
                             "route": "Various",
-                            "duration": "33 days"
+                            "duration": "33 days",
+                            "note": ""
                         },
                         {
                             "day": "Post induction",
                             "name": "Blinatumomab",
                             "dose": "As per MRD status",
                             "route": "IV",
-                            "duration": "28 days"
+                            "duration": "28 days",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -411,49 +442,56 @@
                             "name": "Cyclophosphamide",
                             "dose": "300 mg/m² every 12 hours × 6 doses",
                             "route": "IV",
-                            "duration": "Over 3 hours"
+                            "duration": "Over 3 hours",
+                            "note": ""
                         },
                         {
                             "day": "Day 1–3",
                             "name": "Mesna",
                             "dose": "600 mg/m²/day (divided doses)",
                             "route": "IV/PO",
-                            "duration": "Given with cyclophosphamide"
+                            "duration": "Given with cyclophosphamide",
+                            "note": ""
                         },
                         {
                             "day": "Day 1-4",
                             "name": "Dexamethasone",
                             "dose": "40 mg",
                             "route": "PO/IV",
-                            "duration": "4 Days"
+                            "duration": "4 Days",
+                            "note": ""
                         },
                         {
                             "day": "Day 4",
                             "name": "Doxorubicin",
                             "dose": "50 mg/m²",
                             "route": "IV",
-                            "duration": "Over 4 hours"
+                            "duration": "Over 4 hours",
+                            "note": ""
                         },
                         {
                             "day": "Day 4",
                             "name": "Vincristine",
                             "dose": "2 mg",
                             "route": "IV",
-                            "duration": "Push"
+                            "duration": "Push",
+                            "note": ""
                         },
                         {
                             "day": "Day 11-14",
                             "name": "Dexamethasone",
                             "dose": "40 mg",
                             "route": "PO/IV",
-                            "duration": "4 Days"
+                            "duration": "4 Days",
+                            "note": ""
                         },
                         {
                             "day": "Day 11",
                             "name": "Vincristine",
                             "dose": "2 mg",
                             "route": "IV",
-                            "duration": "Push"
+                            "duration": "Push",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -472,28 +510,32 @@
                             "name": "Methotrexate (High Dose)",
                             "dose": "1 g/m²",
                             "route": "IV",
-                            "duration": "Over 24 hours"
+                            "duration": "Over 24 hours",
+                            "note": ""
                         },
                         {
                             "day": "Day 1-3",
                             "name": "Methylprednisolone",
                             "dose": "50 mg every 12 hours",
                             "route": "IV",
-                            "duration": "3 Days"
+                            "duration": "3 Days",
+                            "note": ""
                         },
                         {
                             "day": "Day 2 (36 hours after start of MTX)",
                             "name": "Leucovorin Rescue",
                             "dose": "15 mg every 6 hours",
                             "route": "IV/PO",
-                            "duration": "Until methotrexate level <0.1"
+                            "duration": "Until methotrexate level <0.1",
+                            "note": ""
                         },
                         {
                             "day": "Day 2-3",
                             "name": "Cytarabine",
                             "dose": "3 g/m² every 12 hours × 4 doses",
                             "route": "IV",
-                            "duration": "Over 3 hours"
+                            "duration": "Over 3 hours",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -518,28 +560,32 @@
                             "name": "6-Mercaptopurine",
                             "dose": "50–75 mg/m²",
                             "route": "Oral",
-                            "duration": "2 years"
+                            "duration": "2 years",
+                            "note": ""
                         },
                         {
                             "day": "Weekly",
                             "name": "Methotrexate",
                             "dose": "20 mg/m²",
                             "route": "Oral",
-                            "duration": "2 years"
+                            "duration": "2 years",
+                            "note": ""
                         },
                         {
                             "day": "Monthly",
                             "name": "Vincristine",
                             "dose": "1.4 mg/m²",
                             "route": "IV",
-                            "duration": "Monthly"
+                            "duration": "Monthly",
+                            "note": ""
                         },
                         {
                             "day": "Monthly",
                             "name": "Prednisone",
                             "dose": "40 mg/m²",
                             "route": "Oral",
-                            "duration": "5 days each cycle"
+                            "duration": "5 days each cycle",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -560,7 +606,8 @@
                             "name": "Methotrexate ± Cytarabine ± Hydrocortisone",
                             "dose": "Per center protocol",
                             "route": "Intrathecal",
-                            "duration": "As scheduled"
+                            "duration": "As scheduled",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -580,13 +627,15 @@
                             "name": "Blinatumomab",
                             "dose": "As per MRD status",
                             "route": "IV",
-                            "duration": "Continuous 28 days"
+                            "duration": "Continuous 28 days",
+                            "note": ""
                         },
                         {
                             "name": "Inotuzumab ozogamicin",
                             "dose": "0.8 mg/m² → 0.5 mg/m²",
                             "route": "IV",
-                            "duration": "Cycle-based"
+                            "duration": "Cycle-based",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -609,7 +658,8 @@
                             "name": "Imatinib",
                             "dose": "400 mg once daily",
                             "route": "Oral",
-                            "duration": "Continuous"
+                            "duration": "Continuous",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -627,7 +677,8 @@
                             "name": "Dasatinib",
                             "dose": "100 mg once daily",
                             "route": "Oral",
-                            "duration": "Continuous"
+                            "duration": "Continuous",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -645,7 +696,8 @@
                             "name": "Nilotinib",
                             "dose": "300 mg twice daily",
                             "route": "Oral",
-                            "duration": "Continuous"
+                            "duration": "Continuous",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -668,7 +720,8 @@
                             "name": "Imatinib",
                             "dose": "600–800 mg daily",
                             "route": "Oral",
-                            "duration": "Continuous"
+                            "duration": "Continuous",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -685,7 +738,8 @@
                             "name": "Dasatinib or Nilotinib",
                             "dose": "Per guideline",
                             "route": "Oral",
-                            "duration": "Continuous"
+                            "duration": "Continuous",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -707,7 +761,8 @@
                             "name": "Ponatinib",
                             "dose": "15–45 mg daily (mutation-dependent)",
                             "route": "Oral",
-                            "duration": "Continuous"
+                            "duration": "Continuous",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -725,35 +780,40 @@
                             "name": "Cyclophosphamide",
                             "dose": "300 mg/m² every 12 hours",
                             "route": "IV",
-                            "duration": "6 doses"
+                            "duration": "6 doses",
+                            "note": ""
                         },
                         {
                             "day": "Day 1–3",
                             "name": "Mesna",
                             "dose": "Per protocol",
                             "route": "IV",
-                            "duration": "Uroprotection"
+                            "duration": "Uroprotection",
+                            "note": ""
                         },
                         {
                             "day": "Day 4 & 11",
                             "name": "Vincristine",
                             "dose": "2 mg",
                             "route": "IV",
-                            "duration": "Rapid push"
+                            "duration": "Rapid push",
+                            "note": ""
                         },
                         {
                             "day": "Day 4",
                             "name": "Doxorubicin (Adriamycin)",
                             "dose": "50 mg/m²",
                             "route": "IV",
-                            "duration": "Administer slowly"
+                            "duration": "Administer slowly",
+                            "note": ""
                         },
                         {
                             "day": "Days 1–4 & 11–14",
                             "name": "Dexamethasone",
                             "dose": "40 mg/day",
                             "route": "Oral/IV",
-                            "duration": "Steroid backbone"
+                            "duration": "Steroid backbone",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -772,21 +832,24 @@
                             "name": "Methotrexate",
                             "dose": "1 g/m²",
                             "route": "IV",
-                            "duration": "Over several hours"
+                            "duration": "Over several hours",
+                            "note": ""
                         },
                         {
                             "day": "Day 2",
                             "name": "Cytarabine",
                             "dose": "3 g/m² every 12 hours × 2 doses",
                             "route": "IV",
-                            "duration": "High-dose"
+                            "duration": "High-dose",
+                            "note": ""
                         },
                         {
                             "day": "Multiple Days",
                             "name": "Leucovorin Rescue",
                             "dose": "Per protocol",
                             "route": "IV/Oral",
-                            "duration": "Begin 24 hours post-MTX"
+                            "duration": "Begin 24 hours post-MTX",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -812,14 +875,16 @@
                             "name": "Obinutuzumab",
                             "dose": "100 mg → 900 mg → 1000 mg",
                             "route": "IV",
-                            "duration": "Per infusion protocol"
+                            "duration": "Per infusion protocol",
+                            "note": ""
                         },
                         {
                             "day": "Cycle 1–6",
                             "name": "Venetoclax",
                             "dose": "20 → 50 → 100 → 200 → 400 mg ramp-up",
                             "route": "PO",
-                            "duration": "Daily after ramp-up"
+                            "duration": "Daily after ramp-up",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -837,7 +902,8 @@
                             "name": "Acalabrutinib",
                             "dose": "100 mg twice daily",
                             "route": "PO",
-                            "duration": "Continuous"
+                            "duration": "Continuous",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -855,7 +921,8 @@
                             "name": "Zanubrutinib",
                             "dose": "160 mg twice daily or 320 mg daily",
                             "route": "PO",
-                            "duration": "Continuous"
+                            "duration": "Continuous",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -873,7 +940,8 @@
                             "name": "Ibrutinib",
                             "dose": "420 mg daily",
                             "route": "PO",
-                            "duration": "Continuous"
+                            "duration": "Continuous",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -891,21 +959,24 @@
                             "name": "Fludarabine",
                             "dose": "25 mg/m²",
                             "route": "IV",
-                            "duration": "Per protocol"
+                            "duration": "Per protocol",
+                            "note": ""
                         },
                         {
                             "day": "Days 1–3",
                             "name": "Cyclophosphamide",
                             "dose": "250 mg/m²",
                             "route": "IV",
-                            "duration": "Per protocol"
+                            "duration": "Per protocol",
+                            "note": ""
                         },
                         {
                             "day": "Day 1",
                             "name": "Rituximab",
                             "dose": "375 mg/m² first cycle → 500 mg/m²",
                             "route": "IV",
-                            "duration": "Premedicate required"
+                            "duration": "Premedicate required",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -923,14 +994,16 @@
                             "name": "Bendamustine",
                             "dose": "90 mg/m²",
                             "route": "IV",
-                            "duration": "Per protocol"
+                            "duration": "Per protocol",
+                            "note": ""
                         },
                         {
                             "day": "Day 1",
                             "name": "Rituximab",
                             "dose": "375–500 mg/m²",
                             "route": "IV",
-                            "duration": "Premedicate required"
+                            "duration": "Premedicate required",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -953,14 +1026,16 @@
                             "name": "Venetoclax",
                             "dose": "20 → 400 mg ramp-up",
                             "route": "PO",
-                            "duration": "Daily"
+                            "duration": "Daily",
+                            "note": ""
                         },
                         {
                             "day": "Cycle 1–6",
                             "name": "Rituximab",
                             "dose": "375 mg/m² → 500 mg/m²",
                             "route": "IV",
-                            "duration": "Per schedule"
+                            "duration": "Per schedule",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -978,7 +1053,8 @@
                             "name": "Acalabrutinib",
                             "dose": "100 mg BID",
                             "route": "PO",
-                            "duration": "Continuous"
+                            "duration": "Continuous",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -996,7 +1072,8 @@
                             "name": "Pirtobrutinib",
                             "dose": "200 mg daily",
                             "route": "PO",
-                            "duration": "Continuous"
+                            "duration": "Continuous",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -1014,14 +1091,16 @@
                             "name": "Methylprednisolone",
                             "dose": "1 g/day",
                             "route": "IV",
-                            "duration": "3 days"
+                            "duration": "3 days",
+                            "note": ""
                         },
                         {
                             "day": "Day 1",
                             "name": "Rituximab",
                             "dose": "375 mg/m²",
                             "route": "IV",
-                            "duration": "Premedicate"
+                            "duration": "Premedicate",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -1054,7 +1133,8 @@
                             "name": "IVIG",
                             "dose": "0.3–0.5 g/kg",
                             "route": "IV",
-                            "duration": "Slow infusion"
+                            "duration": "Slow infusion",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -1071,14 +1151,16 @@
                             "name": "Allopurinol",
                             "dose": "100–300 mg/day",
                             "route": "PO",
-                            "duration": "Start 2–3 days prior"
+                            "duration": "Start 2–3 days prior",
+                            "note": ""
                         },
                         {
                             "day": "High-risk cases",
                             "name": "Rasburicase",
                             "dose": "6 mg single dose",
                             "route": "IV",
-                            "duration": "One-time"
+                            "duration": "One-time",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -1103,14 +1185,16 @@
                             "name": "ATRA (Tretinoin)",
                             "dose": "45 mg/m²/day divided BID",
                             "route": "Oral",
-                            "duration": "Daily"
+                            "duration": "Daily",
+                            "note": ""
                         },
                         {
                             "day": "Days 1–42",
                             "name": "Arsenic Trioxide (ATO)",
                             "dose": "0.15 mg/kg/day",
                             "route": "IV",
-                            "duration": "Daily infusion"
+                            "duration": "Daily infusion",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -1128,21 +1212,24 @@
                             "name": "ATRA (Tretinoin)",
                             "dose": "45 mg/m²/day divided BID",
                             "route": "Oral",
-                            "duration": "Daily"
+                            "duration": "Daily",
+                            "note": ""
                         },
                         {
                             "day": "Day 1",
                             "name": "Idarubicin",
                             "dose": "12 mg/m²",
                             "route": "IV",
-                            "duration": "Single dose or per protocol"
+                            "duration": "Single dose or per protocol",
+                            "note": ""
                         },
                         {
                             "day": "Additional",
                             "name": "ATO (optional)",
                             "dose": "0.15 mg/kg/day",
                             "route": "IV",
-                            "duration": "Center-specific"
+                            "duration": "Center-specific",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -1165,14 +1252,16 @@
                             "name": "ATRA",
                             "dose": "45 mg/m²/day",
                             "route": "Oral",
-                            "duration": "2 weeks on / 2 weeks off"
+                            "duration": "2 weeks on / 2 weeks off",
+                            "note": ""
                         },
                         {
                             "day": "ATO",
                             "name": "Arsenic Trioxide",
                             "dose": "0.15 mg/kg/day",
                             "route": "IV",
-                            "duration": "5 days/week × 4 weeks per cycle"
+                            "duration": "5 days/week × 4 weeks per cycle",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -1190,14 +1279,16 @@
                             "name": "ATRA",
                             "dose": "45 mg/m²/day",
                             "route": "Oral",
-                            "duration": "As per cycle"
+                            "duration": "As per cycle",
+                            "note": ""
                         },
                         {
                             "day": "Cycle-based",
                             "name": "Anthracycline (Idarubicin or Daunorubicin)",
                             "dose": "Per protocol",
                             "route": "IV",
-                            "duration": "Per cycle"
+                            "duration": "Per cycle",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -1220,21 +1311,24 @@
                             "name": "ATRA",
                             "dose": "45 mg/m²/day",
                             "route": "Oral",
-                            "duration": "14-day pulse"
+                            "duration": "14-day pulse",
+                            "note": ""
                         },
                         {
                             "day": "Daily",
                             "name": "6-Mercaptopurine",
                             "dose": "50–75 mg/m²/day",
                             "route": "Oral",
-                            "duration": "Continuous"
+                            "duration": "Continuous",
+                            "note": ""
                         },
                         {
                             "day": "Weekly",
                             "name": "Methotrexate",
                             "dose": "15 mg/m²",
                             "route": "Oral",
-                            "duration": "Weekly"
+                            "duration": "Weekly",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -1257,14 +1351,16 @@
                             "name": "Cryoprecipitate",
                             "dose": "Maintain fibrinogen > 150 mg/dL",
                             "route": "IV",
-                            "duration": "Per transfusion"
+                            "duration": "Per transfusion",
+                            "note": ""
                         },
                         {
                             "day": "As needed",
                             "name": "Platelets",
                             "dose": "Maintain > 30–50 ×10⁹/L",
                             "route": "IV",
-                            "duration": "Per transfusion"
+                            "duration": "Per transfusion",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -1282,7 +1378,8 @@
                             "name": "Dexamethasone",
                             "dose": "10 mg IV twice daily",
                             "route": "IV",
-                            "duration": "Until symptoms resolve"
+                            "duration": "Until symptoms resolve",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -1307,21 +1404,24 @@
                             "name": "Bortezomib",
                             "dose": "1.3 mg/m²",
                             "route": "SC or IV",
-                            "duration": "Bolus"
+                            "duration": "Bolus",
+                            "note": ""
                         },
                         {
                             "day": "Days 1–14",
                             "name": "Lenalidomide",
                             "dose": "25 mg daily",
                             "route": "PO",
-                            "duration": "Daily × 14 days"
+                            "duration": "Daily × 14 days",
+                            "note": ""
                         },
                         {
                             "day": "Days 1, 8, 15",
                             "name": "Dexamethasone",
                             "dose": "40 mg",
                             "route": "PO/IV",
-                            "duration": "Weekly"
+                            "duration": "Weekly",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -1339,28 +1439,32 @@
                             "name": "Daratumumab",
                             "dose": "16 mg/kg (IV) or 1,800 mg (SC)",
                             "route": "IV/SC",
-                            "duration": "As per infusion protocol"
+                            "duration": "As per infusion protocol",
+                            "note": ""
                         },
                         {
                             "day": "Days 1, 4, 8, 11",
                             "name": "Bortezomib",
                             "dose": "1.3 mg/m²",
                             "route": "SC",
-                            "duration": "Bolus"
+                            "duration": "Bolus",
+                            "note": ""
                         },
                         {
                             "day": "Days 1–14",
                             "name": "Lenalidomide",
                             "dose": "25 mg",
                             "route": "PO",
-                            "duration": "Daily"
+                            "duration": "Daily",
+                            "note": ""
                         },
                         {
                             "day": "Days 1, 8, 15",
                             "name": "Dexamethasone",
                             "dose": "40 mg",
                             "route": "PO/IV",
-                            "duration": "Weekly"
+                            "duration": "Weekly",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -1378,21 +1482,24 @@
                             "name": "Carfilzomib",
                             "dose": "20 mg/m² → 36–56 mg/m²",
                             "route": "IV",
-                            "duration": "30 minutes"
+                            "duration": "30 minutes",
+                            "note": ""
                         },
                         {
                             "day": "Days 1–21",
                             "name": "Lenalidomide",
                             "dose": "25 mg daily",
                             "route": "PO",
-                            "duration": "Daily × 21 days"
+                            "duration": "Daily × 21 days",
+                            "note": ""
                         },
                         {
                             "day": "Weekly",
                             "name": "Dexamethasone",
                             "dose": "40 mg",
                             "route": "PO/IV",
-                            "duration": "Weekly"
+                            "duration": "Weekly",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -1415,21 +1522,24 @@
                             "name": "Bortezomib",
                             "dose": "1.3 mg/m²",
                             "route": "SC",
-                            "duration": "Bolus"
+                            "duration": "Bolus",
+                            "note": ""
                         },
                         {
                             "day": "1–14",
                             "name": "Lenalidomide",
                             "dose": "10–15 mg",
                             "route": "PO",
-                            "duration": "Daily"
+                            "duration": "Daily",
+                            "note": ""
                         },
                         {
                             "day": "1, 8, 15",
                             "name": "Dexamethasone",
                             "dose": "20–40 mg",
                             "route": "PO/IV",
-                            "duration": "Weekly"
+                            "duration": "Weekly",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -1447,21 +1557,24 @@
                             "name": "Carfilzomib",
                             "dose": "36–56 mg/m²",
                             "route": "IV",
-                            "duration": "30 minutes"
+                            "duration": "30 minutes",
+                            "note": ""
                         },
                         {
                             "day": "1–21",
                             "name": "Lenalidomide",
                             "dose": "10–15 mg",
                             "route": "PO",
-                            "duration": "Daily"
+                            "duration": "Daily",
+                            "note": ""
                         },
                         {
                             "day": "Weekly",
                             "name": "Dexamethasone",
                             "dose": "20–40 mg",
                             "route": "PO/IV",
-                            "duration": "Weekly"
+                            "duration": "Weekly",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -1483,7 +1596,8 @@
                             "name": "Lenalidomide",
                             "dose": "10 mg",
                             "route": "PO",
-                            "duration": "Daily × 21 days"
+                            "duration": "Daily × 21 days",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -1501,7 +1615,8 @@
                             "name": "Bortezomib",
                             "dose": "1.3 mg/m²",
                             "route": "SC",
-                            "duration": "Bolus"
+                            "duration": "Bolus",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -1524,7 +1639,8 @@
                             "name": "Daratumumab",
                             "dose": "16 mg/kg IV or 1,800 mg SC",
                             "route": "IV/SC",
-                            "duration": "As per schedule"
+                            "duration": "As per schedule",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -1542,14 +1658,16 @@
                             "name": "Carfilzomib",
                             "dose": "56–70 mg/m²",
                             "route": "IV",
-                            "duration": "30 minutes"
+                            "duration": "30 minutes",
+                            "note": ""
                         },
                         {
                             "day": "Weekly",
                             "name": "Dexamethasone",
                             "dose": "40 mg",
                             "route": "PO/IV",
-                            "duration": "Weekly"
+                            "duration": "Weekly",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -1566,14 +1684,16 @@
                             "name": "Pomalidomide",
                             "dose": "4 mg",
                             "route": "PO",
-                            "duration": "Daily"
+                            "duration": "Daily",
+                            "note": ""
                         },
                         {
                             "day": "Weekly",
                             "name": "Dexamethasone",
                             "dose": "20–40 mg",
                             "route": "PO/IV",
-                            "duration": "Weekly"
+                            "duration": "Weekly",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -1591,7 +1711,8 @@
                             "name": "Teclistamab",
                             "dose": "Step-up dosing",
                             "route": "SC",
-                            "duration": "Weekly"
+                            "duration": "Weekly",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -1616,28 +1737,32 @@
                             "name": "Doxorubicin (Adriamycin)",
                             "dose": "25 mg/m²",
                             "route": "IV",
-                            "duration": "Bolus"
+                            "duration": "Bolus",
+                            "note": ""
                         },
                         {
                             "day": "Day 1 & 15",
                             "name": "Bleomycin",
                             "dose": "10 units/m²",
                             "route": "IV",
-                            "duration": "Slow push / short infusion"
+                            "duration": "Slow push / short infusion",
+                            "note": ""
                         },
                         {
                             "day": "Day 1 & 15",
                             "name": "Vinblastine",
                             "dose": "6 mg/m²",
                             "route": "IV",
-                            "duration": "Bolus"
+                            "duration": "Bolus",
+                            "note": ""
                         },
                         {
                             "day": "Day 1 & 15",
                             "name": "Dacarbazine",
                             "dose": "375 mg/m²",
                             "route": "IV",
-                            "duration": "30–60 min"
+                            "duration": "30–60 min",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -1656,28 +1781,32 @@
                             "name": "Brentuximab Vedotin",
                             "dose": "1.2 mg/kg",
                             "route": "IV",
-                            "duration": "30 min"
+                            "duration": "30 min",
+                            "note": ""
                         },
                         {
                             "day": "Day 1 & 15",
                             "name": "Doxorubicin",
                             "dose": "25 mg/m²",
                             "route": "IV",
-                            "duration": "Bolus"
+                            "duration": "Bolus",
+                            "note": ""
                         },
                         {
                             "day": "Day 1 & 15",
                             "name": "Vinblastine",
                             "dose": "6 mg/m²",
                             "route": "IV",
-                            "duration": "Bolus"
+                            "duration": "Bolus",
+                            "note": ""
                         },
                         {
                             "day": "Day 1 & 15",
                             "name": "Dacarbazine",
                             "dose": "375 mg/m²",
                             "route": "IV",
-                            "duration": "30–60 min"
+                            "duration": "30–60 min",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -1701,21 +1830,24 @@
                             "name": "Ifosfamide + Mesna",
                             "dose": "5 g/m² total",
                             "route": "IV",
-                            "duration": "Continuous or fractionated"
+                            "duration": "Continuous or fractionated",
+                            "note": ""
                         },
                         {
                             "day": "Day 2",
                             "name": "Carboplatin",
                             "dose": "AUC 5",
                             "route": "IV",
-                            "duration": "60 min"
+                            "duration": "60 min",
+                            "note": ""
                         },
                         {
                             "day": "Days 1–3",
                             "name": "Etoposide",
                             "dose": "100 mg/m²/day",
                             "route": "IV",
-                            "duration": "60 min"
+                            "duration": "60 min",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -1734,21 +1866,24 @@
                             "name": "Gemcitabine",
                             "dose": "1000 mg/m²",
                             "route": "IV",
-                            "duration": "30 min"
+                            "duration": "30 min",
+                            "note": ""
                         },
                         {
                             "day": "Days 1–4",
                             "name": "Dexamethasone",
                             "dose": "40 mg",
                             "route": "PO/IV",
-                            "duration": "Daily × 4 days"
+                            "duration": "Daily × 4 days",
+                            "note": ""
                         },
                         {
                             "day": "Day 1",
                             "name": "Cisplatin",
                             "dose": "75 mg/m²",
                             "route": "IV",
-                            "duration": "Continuous or split dosing"
+                            "duration": "Continuous or split dosing",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -1772,7 +1907,8 @@
                             "name": "Brentuximab Vedotin",
                             "dose": "1.8 mg/kg",
                             "route": "IV",
-                            "duration": "30 minutes"
+                            "duration": "30 minutes",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -1797,35 +1933,40 @@
                             "name": "Rituximab",
                             "dose": "375 mg/m²",
                             "route": "IV",
-                            "duration": "Varies (slow initial titration)"
+                            "duration": "Varies (slow initial titration)",
+                            "note": ""
                         },
                         {
                             "day": "Day 1",
                             "name": "Cyclophosphamide",
                             "dose": "750 mg/m²",
                             "route": "IV",
-                            "duration": "30–60 min"
+                            "duration": "30–60 min",
+                            "note": ""
                         },
                         {
                             "day": "Day 1",
                             "name": "Doxorubicin",
                             "dose": "50 mg/m²",
                             "route": "IV",
-                            "duration": "Bolus"
+                            "duration": "Bolus",
+                            "note": ""
                         },
                         {
                             "day": "Day 1",
                             "name": "Vincristine",
                             "dose": "1.4 mg/m² (max 2 mg)",
                             "route": "IV",
-                            "duration": "Bolus"
+                            "duration": "Bolus",
+                            "note": ""
                         },
                         {
                             "day": "Days 1–5",
                             "name": "Prednisone",
                             "dose": "100 mg/day",
                             "route": "PO",
-                            "duration": "5 days"
+                            "duration": "5 days",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -1844,42 +1985,48 @@
                             "name": "Rituximab",
                             "dose": "375 mg/m²",
                             "route": "IV",
-                            "duration": "Slow titrated infusion"
+                            "duration": "Slow titrated infusion",
+                            "note": ""
                         },
                         {
                             "day": "Days 1–4",
                             "name": "Etoposide",
                             "dose": "50 mg/m²/day",
                             "route": "IV",
-                            "duration": "Continuous infusion"
+                            "duration": "Continuous infusion",
+                            "note": ""
                         },
                         {
                             "day": "Days 1–4",
                             "name": "Doxorubicin",
                             "dose": "10 mg/m²/day",
                             "route": "IV",
-                            "duration": "Continuous infusion"
+                            "duration": "Continuous infusion",
+                            "note": ""
                         },
                         {
                             "day": "Days 1–4",
                             "name": "Vincristine",
                             "dose": "0.4 mg/m²/day",
                             "route": "IV",
-                            "duration": "Continuous infusion"
+                            "duration": "Continuous infusion",
+                            "note": ""
                         },
                         {
                             "day": "Day 5",
                             "name": "Cyclophosphamide",
                             "dose": "750 mg/m²",
                             "route": "IV",
-                            "duration": "60 min"
+                            "duration": "60 min",
+                            "note": ""
                         },
                         {
                             "day": "Days 1–5",
                             "name": "Prednisone",
                             "dose": "60 mg/m²/day",
                             "route": "PO",
-                            "duration": "5 days"
+                            "duration": "5 days",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -1898,14 +2045,16 @@
                             "name": "Rituximab",
                             "dose": "375 mg/m²",
                             "route": "IV",
-                            "duration": "Slow initial infusion"
+                            "duration": "Slow initial infusion",
+                            "note": ""
                         },
                         {
                             "day": "Days 1–2",
                             "name": "Bendamustine",
                             "dose": "90 mg/m²/day",
                             "route": "IV",
-                            "duration": "30–60 min"
+                            "duration": "30–60 min",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -1929,21 +2078,24 @@
                             "name": "Dexamethasone",
                             "dose": "40 mg/day",
                             "route": "IV/PO",
-                            "duration": "4 days"
+                            "duration": "4 days",
+                            "note": ""
                         },
                         {
                             "day": "Day 1",
                             "name": "Cisplatin",
                             "dose": "100 mg/m²",
                             "route": "IV",
-                            "duration": "24-hour continuous infusion"
+                            "duration": "24-hour continuous infusion",
+                            "note": ""
                         },
                         {
                             "day": "Day 2",
                             "name": "Cytarabine",
                             "dose": "2 g/m² × 2 doses",
                             "route": "IV",
-                            "duration": "3-hour infusion each"
+                            "duration": "3-hour infusion each",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -1962,28 +2114,32 @@
                             "name": "Rituximab",
                             "dose": "375 mg/m²",
                             "route": "IV",
-                            "duration": "Slow titrated infusion"
+                            "duration": "Slow titrated infusion",
+                            "note": ""
                         },
                         {
                             "day": "Days 1 & 8",
                             "name": "Gemcitabine",
                             "dose": "1000 mg/m²",
                             "route": "IV",
-                            "duration": "30 min"
+                            "duration": "30 min",
+                            "note": ""
                         },
                         {
                             "day": "Days 1–4",
                             "name": "Dexamethasone",
                             "dose": "40 mg/day",
                             "route": "PO/IV",
-                            "duration": "4 days"
+                            "duration": "4 days",
+                            "note": ""
                         },
                         {
                             "day": "Day 1 or 2",
                             "name": "Cisplatin",
                             "dose": "75 mg/m²",
                             "route": "IV",
-                            "duration": "Varies"
+                            "duration": "Varies",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -2007,7 +2163,8 @@
                             "name": "Rituximab",
                             "dose": "375 mg/m²",
                             "route": "IV",
-                            "duration": "Titrated infusion"
+                            "duration": "Titrated infusion",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -2033,14 +2190,16 @@
                             "name": "Erythropoietin (EPO)",
                             "dose": "40,000–60,000 units",
                             "route": "SC",
-                            "duration": "Once weekly or every 2 weeks"
+                            "duration": "Once weekly or every 2 weeks",
+                            "note": ""
                         },
                         {
                             "day": "Weekly",
                             "name": "Darbepoetin",
                             "dose": "150–300 mcg",
                             "route": "SC",
-                            "duration": "Weekly"
+                            "duration": "Weekly",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -2059,7 +2218,8 @@
                             "name": "Luspatercept",
                             "dose": "1 mg/kg (titrate to 1.75 mg/kg)",
                             "route": "SC",
-                            "duration": "Q3 weeks"
+                            "duration": "Q3 weeks",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -2082,7 +2242,8 @@
                             "name": "Azacitidine",
                             "dose": "75 mg/m²/day",
                             "route": "SC or IV",
-                            "duration": "Once daily"
+                            "duration": "Once daily",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -2101,7 +2262,8 @@
                             "name": "Decitabine",
                             "dose": "20 mg/m²/day",
                             "route": "IV",
-                            "duration": "1 hour infusion"
+                            "duration": "1 hour infusion",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -2124,14 +2286,16 @@
                             "name": "Azacitidine",
                             "dose": "75 mg/m²/day",
                             "route": "SC or IV",
-                            "duration": "Daily"
+                            "duration": "Daily",
+                            "note": ""
                         },
                         {
                             "day": "Days 1–14 or 1–21",
                             "name": "Venetoclax",
                             "dose": "100–400 mg/day (ramp-up)",
                             "route": "PO",
-                            "duration": "Daily with ramp-up"
+                            "duration": "Daily with ramp-up",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
@@ -2149,7 +2313,8 @@
                             "name": "CPX-351 (Vyxeos)",
                             "dose": "44 mg/m² daunorubicin + 100 mg/m² cytarabine",
                             "route": "IV",
-                            "duration": "90 min infusion"
+                            "duration": "90 min infusion",
+                            "note": ""
                         }
                     ],
                     "NursesInfo": [
