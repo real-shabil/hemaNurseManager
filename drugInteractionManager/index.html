@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Drug Interaction Manager</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 
@@ -21,19 +21,18 @@
 
         <!-- Sidebar -->
         <aside class="sidebar">
-            <div class="card" style="margin-bottom: 20px;">
+            <div class="card mb-20">
                 <h3>📂 Load Data</h3>
-                <p style="font-size:0.85rem; color:#666; margin-bottom:10px;">Select your
+                <p class="text-sm text-gray mb-10">Select your
                     <code>drugInteractions.json</code> file.
                 </p>
-                <input type="file" id="jsonFileInput" accept=".json" class="form-control" style="font-size:0.8rem;">
+                <input type="file" id="jsonFileInput" accept=".json" class="form-control text-xs">
             </div>
 
             <div class="card">
                 <h3>Actions</h3>
-                <button class="btn btn-primary" id="addInteractionBtn" style="width:100%; margin-bottom:10px;"
-                    disabled>+ Add Interaction</button>
-                <button class="btn btn-success" id="downloadBtn" style="width:100%;" disabled>💾 Download JSON</button>
+                <button class="btn btn-primary w-100 mb-10" id="addInteractionBtn" disabled>+ Add Interaction</button>
+                <button class="btn btn-success w-100" id="downloadBtn" disabled>💾 Download JSON</button>
                 <p id="saveStatus" class="save-status"></p>
             </div>
         </aside>
@@ -41,7 +40,7 @@
         <!-- Main Content -->
         <section class="content">
             <div id="welcomeView">
-                <div class="card empty-state" style="text-align:center; padding: 40px;">
+                <div class="card empty-state">
                     <h2>Welcome</h2>
                     <p>Please load a valid JSON file to manage drug interactions.</p>
                 </div>
@@ -50,11 +49,10 @@
             <div id="mainView" hidden>
                 <div class="view-header">
                     <h2>Interactions List</h2>
-                    <input type="text" id="searchInput" class="form-control" placeholder="Search drug names..."
-                        style="width: 300px;">
+                    <input type="text" id="searchInput" class="form-control w-300px" placeholder="Search drug names...">
                 </div>
 
-                <div class="card" style="padding:0; overflow:hidden;">
+                <div class="card p-0 overflow-hidden">
                     <table class="interaction-table">
                         <thead>
                             <tr>
@@ -68,7 +66,7 @@
                             <!-- Rows loaded here -->
                         </tbody>
                     </table>
-                    <div id="noResults" style="padding:20px; text-align:center; color:#666; display:none;">No
+                    <div id="noResults" class="p-20 text-center text-gray hidden">No
                         interactions found matching your search.</div>
                 </div>
             </div>
@@ -81,7 +79,7 @@
         <div class="modal-content">
             <h3 id="modalTitle">Edit Interaction</h3>
             <div id="modalBody">
-                <div class="form-group" style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+                <div class="form-group grid-2 grid-gap-10">
                     <div>
                         <label>Drug A</label>
                         <input type="text" id="inputDrugA" class="form-control" placeholder="e.g. Acyclovir"
@@ -98,10 +96,10 @@
                 </datalist>
 
                 <div class="form-group">
-                    <label style="margin-bottom:8px; display:block;">Compatibility Data</label>
-                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+                    <label class="block mb-10">Compatibility Data</label>
+                    <div class="grid-2 grid-gap-10">
                         <div>
-                            <label style="font-size:0.8rem; color:#666;">Y-Site</label>
+                            <label class="text-xs text-gray">Y-Site</label>
                             <select id="inputYSite" class="form-control compat-select">
                                 <option value="">No Data</option>
                                 <option value="Compatible">Compatible</option>
@@ -110,7 +108,7 @@
                             </select>
                         </div>
                         <div>
-                            <label style="font-size:0.8rem; color:#666;">Admixture</label>
+                            <label class="text-xs text-gray">Admixture</label>
                             <select id="inputAdmixture" class="form-control compat-select">
                                 <option value="">No Data</option>
                                 <option value="Compatible">Compatible</option>
@@ -119,7 +117,7 @@
                             </select>
                         </div>
                         <div>
-                            <label style="font-size:0.8rem; color:#666;">Syringe</label>
+                            <label class="text-xs text-gray">Syringe</label>
                             <select id="inputSyringe" class="form-control compat-select">
                                 <option value="">No Data</option>
                                 <option value="Compatible">Compatible</option>
@@ -128,7 +126,7 @@
                             </select>
                         </div>
                         <div>
-                            <label style="font-size:0.8rem; color:#666;">Solution</label>
+                            <label class="text-xs text-gray">Solution</label>
                             <select id="inputSolution" class="form-control compat-select">
                                 <option value="">No Data</option>
                                 <option value="Compatible">Compatible</option>
@@ -141,7 +139,7 @@
 
                 <div class="form-group">
                     <label>Generated Clinical Note</label>
-                    <textarea id="inputNote" class="form-control" style="background:#f9f9f9;"
+                    <textarea id="inputNote" class="form-control bg-light"
                         placeholder="Auto-generated based on selections above..."></textarea>
                 </div>
 

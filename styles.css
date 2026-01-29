@@ -1,8 +1,16 @@
 :root {
-    --primary-color: #2563eb;
-    --bg-color: #f3f4f6;
-    --text-color: #1f2937;
+    --primary: #004d40;
+    --primary-light: #e0f2f1;
+    --secondary: #00796b;
+    --accent: #d63384;
+    --bg: #f4f6f8;
     --card-bg: #ffffff;
+    --text: #333333;
+    --border: #e0e0e0;
+    --risk: #dc3545;
+    --success: #28a745;
+
+    /* Root portal variables that might differ, merging them here */
     --hover-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
@@ -14,57 +22,657 @@
 
 body {
     font-family: 'Inter', sans-serif;
-    background-color: var(--bg-color);
-    color: var(--text-color);
+    color: var(--text);
+    background-color: var(--bg);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    /* Gradient from sub-apps */
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
 }
 
+/* --- Layout --- */
+
+header {
+    background: var(--primary);
+    background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+    color: white;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h1,
+h2,
+h3 {
+    margin: 0;
+}
+
+h1 {
+    font-size: 1.5rem;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    width: 100%;
+    flex: 1;
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 2rem;
+}
+
+/* Root Portal container override */
 .portal-container {
     max-width: 800px;
     width: 100%;
     padding: 2rem;
+    display: block;
+    /* Override flex of body if needed */
+    margin: 0 auto;
+    /* Center it */
 }
 
+/* --- Sidebar --- */
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+}
+
+.sidebar li {
+    padding: 10px 12px;
+    margin-bottom: 4px;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background 0.2s;
+    font-weight: 500;
+}
+
+.sidebar li:hover {
+    background: var(--bg);
+}
+
+.sidebar li.active {
+    background: var(--primary-light);
+    color: var(--primary);
+    font-weight: 700;
+}
+
+/* --- Components --- */
+
+/* Card */
+.card {
+    background: var(--card-bg);
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    /* Base shadow */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+    /* Frosted glass shadow */
+    padding: 1.5rem;
+}
+
+/* Buttons */
+.btn {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.9rem;
+    display: inline-block;
+    text-align: center;
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: var(--secondary);
+}
+
+.btn-secondary {
+    background: #e0e0e0;
+    color: #333;
+}
+
+.btn-secondary:hover {
+    background: #d0d0d0;
+}
+
+.btn-success {
+    background: var(--success);
+    color: white;
+}
+
+.btn-success:hover {
+    background: #218838;
+}
+
+.btn-danger {
+    background: var(--risk);
+    color: white;
+}
+
+.btn-danger-outline {
+    background: transparent;
+    border: 1px solid var(--risk);
+    color: var(--risk);
+}
+
+.btn-danger-outline:hover {
+    background: #fff0f0;
+}
+
+.btn-ghost {
+    background: transparent;
+    color: #666;
+}
+
+.btn-sm {
+    padding: 5px 10px;
+    font-size: 0.8rem;
+}
+
+.btn-remove,
+.btn-insert {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.btn-remove {
+    background: #ffcdd2;
+    color: #c62828;
+}
+
+.btn-insert {
+    background: #c8e6c9;
+    color: #2e7d32;
+}
+
+.btn-insert:hover {
+    background: #a5d6a7;
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background: #ccc !important;
+    color: #666 !important;
+}
+
+/* Forms */
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    font-family: inherit;
+}
+
+textarea.form-control {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal.open {
+    display: flex;
+}
+
+.modal-content {
+    background: white;
+    padding: 24px;
+    border-radius: 12px;
+    width: 600px;
+    max-width: 90%;
+    max-height: 85vh;
+    overflow-y: auto;
+
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 20px;
+    padding-top: 12px;
+    border-top: 1px solid #eee;
+}
+
+/* --- Utility Classes (Replacing Inline Styles) --- */
+.mb-20 {
+    margin-bottom: 20px !important;
+}
+
+.mt-20 {
+    margin-top: 20px !important;
+}
+
+.mb-10 {
+    margin-bottom: 10px !important;
+}
+
+.mt-5 {
+    margin-top: 5px !important;
+}
+
+.mr-10 {
+    margin-right: 10px !important;
+}
+
+.ml-10 {
+    margin-left: 10px !important;
+}
+
+.p-0 {
+    padding: 0 !important;
+}
+
+.p-20 {
+    padding: 20px !important;
+}
+
+.p-40 {
+    padding: 40px !important;
+}
+
+.w-100 {
+    width: 100% !important;
+}
+
+.w-300px {
+    width: 300px !important;
+}
+
+.text-center {
+    text-align: center !important;
+}
+
+.text-left {
+    text-align: left !important;
+}
+
+.text-sm {
+    font-size: 0.85rem !important;
+}
+
+.text-xs {
+    font-size: 0.8rem !important;
+}
+
+.text-gray {
+    color: #666 !important;
+}
+
+.opacity-50 {
+    opacity: 0.5 !important;
+}
+
+.pointer-events-none {
+    pointer-events: none !important;
+}
+
+.overflow-hidden {
+    overflow: hidden !important;
+}
+
+.block {
+    display: block !important;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.grid-gap-10 {
+    gap: 10px !important;
+}
+
+.bg-light {
+    background: #f9f9f9 !important;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 40px;
+}
+
+.save-status {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    text-align: center;
+    color: var(--success);
+    height: 20px;
+}
+
+/* --- Module Specific Styles --- */
+
+/* Chemo Protocol Manager */
+.view-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.phase-block,
+.category-block {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border);
+
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+}
+
+.phase-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 14px;
+}
+
+.phase-header h3 {
+    color: var(--accent);
+}
+
+.btn-phase-actions {
+    font-size: 0.8rem;
+    cursor: pointer;
+    color: #666;
+    margin-left: 10px;
+    background: none;
+    border: none;
+    text-decoration: underline;
+}
+
+.protocol-item,
+.drug-item {
+    background: #fafafa;
+    border: 1px solid #eee;
+    padding: 14px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.protocol-item:hover,
+.drug-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.protocol-header,
+.drug-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.protocol-title,
+.drug-name {
+    font-weight: 700;
+    color: #0056b3;
+    font-size: 1.1rem;
+}
+
+.drug-preview,
+.drug-meta {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 6px 0 0;
+}
+
+.drug-edit-list {
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.drug-edit-item {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr auto auto;
+    gap: 8px;
+    margin-bottom: 8px;
+    align-items: center;
+}
+
+.array-input-group {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+
+/* Chemo Medication Manager */
+.category-description {
+    color: #666;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    background: #e0e0e0;
+    color: #333;
+}
+
+.badge-vesicant {
+    background: #ffcdd2;
+    color: #c62828;
+}
+
+.badge-irritant {
+    background: #fff9c4;
+    color: #f57f17;
+}
+
+/* Drug Interaction Manager */
+.interaction-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.interaction-table th,
+.interaction-table td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.interaction-table th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    color: var(--secondary);
+}
+
+.interaction-table tr:hover {
+    background-color: #fafafa;
+}
+
+.severity-badge {
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.severity-mild {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.severity-moderate {
+    background: #fff3e0;
+    color: #ef6c00;
+}
+
+.severity-severe {
+    background: #ffebee;
+    color: #c62828;
+}
+
+/* Root Portal Specifics */
 .portal-header {
     text-align: center;
-    margin-bottom: 3rem;
+    /* Ultra-light translucent white for glass effect */
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+
+    /* Subtle border and inner glow */
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow:
+        0 4px 6px -1px rgba(0, 0, 0, 0.05),
+        0 20px 25px -5px rgba(0, 0, 0, 0.05),
+        inset 0 0 20px rgba(255, 255, 255, 0.5);
+
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Ambient color blobs for depth */
+.portal-header::before {
+    content: '';
+    position: absolute;
+    top: -30px;
+    left: -30px;
+    width: 200px;
+    height: 200px;
+    background: linear-gradient(135deg, #004d40, #00796b);
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.15;
+    pointer-events: none;
+}
+
+.portal-header::after {
+    content: '';
+    position: absolute;
+    bottom: -30px;
+    right: -30px;
+    width: 150px;
+    height: 150px;
+    background: linear-gradient(135deg, #d63384, #8338ec);
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.1;
+    pointer-events: none;
 }
 
 .portal-header h1 {
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: 800;
-    color: #111827;
     margin-bottom: 0.5rem;
-    letter-spacing: -0.025em;
+    letter-spacing: -1px;
+    /* Gradient text for premium feel */
+    background: linear-gradient(135deg, #1f2937 0%, #4b5563 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: none;
+    position: relative;
+    z-index: 1;
 }
 
 .portal-header p {
-    color: #6b7280;
-    font-size: 1.1rem;
+    color: #4b5563;
+    font-size: 1.25rem;
+    max-width: 600px;
+    margin: 0 auto;
+    font-weight: 500;
+    position: relative;
+    z-index: 1;
 }
 
 .card-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 1.5rem;
 }
 
 .tool-card {
     background: var(--card-bg);
-    border-radius: 16px;
-    padding: 2rem;
+    border-radius: 12px;
+    padding: 1.5rem;
     text-decoration: none;
     color: inherit;
     display: flex;
     align-items: center;
-    gap: 1.5rem;
+    gap: 1rem;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border: 1px solid rgba(0, 0, 0, 0.05);
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
     position: relative;
     overflow: hidden;
 }
@@ -76,14 +684,14 @@ body {
 }
 
 .card-icon {
-    font-size: 3rem;
+    font-size: 2rem;
     background: #eff6ff;
-    width: 80px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 12px;
+    border-radius: 10px;
 }
 
 .card-content h2 {
@@ -107,7 +715,7 @@ body {
 }
 
 .tool-card:hover .card-arrow {
-    color: var(--primary-color);
+    color: var(--primary);
     transform: translateX(5px);
 }
 
@@ -118,7 +726,50 @@ body {
     text-align: center;
 }
 
+/* --- Media Queries --- */
 @media (max-width: 600px) {
+    .container {
+        grid-template-columns: 1fr;
+        padding: 0 16px;
+    }
+
+    .portal-container {
+        padding: 1rem;
+    }
+
+    .content {
+        order: -1;
+    }
+
+    .sidebar {
+        position: relative;
+        z-index: 10;
+        margin-bottom: 20px;
+    }
+
+    .drug-edit-item {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+    }
+
+    .drug-edit-item button.btn-remove {
+        grid-column: 2;
+        grid-row: 1;
+        justify-self: end;
+    }
+
+    .drug-edit-item input:nth-of-type(3),
+    .drug-edit-item input:nth-of-type(4),
+    .drug-edit-item select {
+        grid-column: 1 / -1;
+    }
+
+    .modal-content {
+        width: 95%;
+        max-height: 90vh;
+        padding: 16px;
+    }
+
     .tool-card {
         flex-direction: column;
         text-align: center;
@@ -128,7 +779,7 @@ body {
     .card-arrow {
         display: none;
     }
-    
+
     .card-icon {
         margin-bottom: 1rem;
     }

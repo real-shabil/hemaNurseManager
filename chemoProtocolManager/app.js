@@ -1,6 +1,8 @@
 
 let APP_DATA = {};
 let CURRENT_DISEASE = null;
+let CURRENT_SUBTYPE = null;
+let hasUnsavedChanges = false;
 
 // =========================================================
 // 1. INITIALIZATION & DATA LOADING
@@ -13,14 +15,27 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('addDiseaseBtn').addEventListener('click', promptAddDisease);
     document.getElementById('downloadBtn').addEventListener('click', downloadJSON);
 
-    document.getElementById('deleteDiseaseBtn').addEventListener('click', deleteCurrentDisease);
+    document.getElementById('deleteDiseaseBtn').addEventListener('click', deleteCurrentContext);
     document.getElementById('addPhaseBtn').addEventListener('click', promptAddPhase);
+
+    // New: Add Subtype Button (Dynamic)
+    // We'll add a listener to a new button or existing one if we decide to change UI.
+    // For now, let's keep it simple. We might need a button in the UI for "Add Subtype".
+    // I'll add a button dynamically in the disease view if it's a top-level disease.
 
     // Modal controls
     document.getElementById('closeModalBtn').addEventListener('click', closeModal);
 
     // Initial State
     enableNav(false);
+
+    // Prevent accidental close
+    window.addEventListener('beforeunload', (e) => {
+        if (hasUnsavedChanges || currentEditContext) {
+            e.preventDefault();
+            e.returnValue = '';
+        }
+    });
 });
 
 function handleFileUpload(event) {
@@ -50,12 +65,12 @@ function enableNav(enabled) {
     const dlBtn = document.getElementById('downloadBtn');
 
     if (enabled) {
-        navCard.style.opacity = '1';
-        navCard.style.pointerEvents = 'auto';
+        navCard.classList.remove('opacity-50', 'pointer-events-none');
+        navCard.style.removeProperty('opacity');
+        navCard.style.removeProperty('pointer-events');
         dlBtn.removeAttribute('disabled');
     } else {
-        navCard.style.opacity = '0.5';
-        navCard.style.pointerEvents = 'none';
+        navCard.classList.add('opacity-50', 'pointer-events-none');
         dlBtn.setAttribute('disabled', 'true');
     }
 }
@@ -63,6 +78,29 @@ function enableNav(enabled) {
 // =========================================================
 // 2. SIDEBAR RENDERING
 // =========================================================
+// Helper to determine the structure of a disease object
+function getStructureMode(diseaseData) {
+    if (!diseaseData) return 'empty';
+    if (diseaseData.subtypes && Object.keys(diseaseData.subtypes).length > 0) return 'explicit_subtypes';
+
+    // Check if children look like subtypes (objects) or phases (arrays/objects with 'protocols')
+    // A simplified check: if any child key has a 'protocols' array or is an array itself, it's likely a phase.
+    // Otherwise, if it has children keys, treat as implicit subtype.
+    const keys = Object.keys(diseaseData);
+    if (keys.length === 0) return 'empty';
+
+    const firstKey = keys[0];
+    const child = diseaseData[firstKey];
+
+    // If child has "protocols" property or is an array, then the current level is "Disease -> Phases"
+    if (Array.isArray(child) || (child && child.protocols)) {
+        return 'phases';
+    }
+
+    // Otherwise, assume it's "Disease -> Subtypes -> Phases" (Implicit Subtypes)
+    return 'implicit_subtypes';
+}
+
 function renderDiseaseList() {
     const list = document.getElementById('diseaseList');
     list.innerHTML = '';
@@ -73,15 +111,67 @@ function renderDiseaseList() {
     }
 
     Object.keys(APP_DATA).forEach(key => {
+        const itemContainer = document.createElement('div');
+
+        // Disease Item
         const li = document.createElement('li');
         li.textContent = key;
-        if (CURRENT_DISEASE === key) li.classList.add('active');
+
+        // Check if active (only if no subtype is selected, or if we want to show parent active)
+        if (CURRENT_DISEASE === key && !CURRENT_SUBTYPE) {
+            li.classList.add('active');
+        }
+
         li.onclick = () => {
             CURRENT_DISEASE = key;
-            renderDiseaseList(); // re-render to update active class
+            CURRENT_SUBTYPE = null;
+            renderDiseaseList();
             renderDiseaseView(key);
         };
         list.appendChild(li);
+
+        // Subtypes Processing
+        const diseaseObj = APP_DATA[key];
+        const mode = getStructureMode(diseaseObj);
+
+        let subtypeKeys = [];
+        if (mode === 'explicit_subtypes') {
+            subtypeKeys = Object.keys(diseaseObj.subtypes);
+        } else if (mode === 'implicit_subtypes') {
+            subtypeKeys = Object.keys(diseaseObj);
+        }
+
+        if (subtypeKeys.length > 0) {
+            const ulSub = document.createElement('ul');
+            ulSub.style.paddingLeft = "20px";
+            ulSub.style.listStyle = "none";
+            ulSub.style.marginTop = "0";
+
+            subtypeKeys.forEach(subKey => {
+                const subLi = document.createElement('li');
+                subLi.textContent = "↳ " + subKey;
+                subLi.style.fontSize = "0.9em";
+                subLi.style.color = "#555";
+                subLi.style.cursor = "pointer";
+                subLi.style.padding = "4px 8px";
+
+                if (CURRENT_DISEASE === key && CURRENT_SUBTYPE === subKey) {
+                    subLi.classList.add('active'); // Ensure CSS supports .active on these LIs
+                    subLi.style.color = "var(--primary-color)";
+                    subLi.style.fontWeight = "bold";
+                }
+
+                subLi.onclick = (e) => {
+                    e.stopPropagation();
+                    CURRENT_DISEASE = key;
+                    CURRENT_SUBTYPE = subKey;
+                    renderDiseaseList();
+                    renderDiseaseView(key, subKey);
+                };
+                ulSub.appendChild(subLi);
+            });
+            list.appendChild(ulSub);
+        }
     });
 }
 
@@ -94,6 +184,7 @@ function promptAddDisease() {
     if (!APP_DATA[name]) {
         APP_DATA[name] = {};
         CURRENT_DISEASE = name;
+        CURRENT_SUBTYPE = null;
         renderDiseaseList();
         renderDiseaseView(name);
         markUnsaved();
@@ -111,19 +202,106 @@ function showWelcome(msg) {
     if (msg) document.getElementById('welcomeTitle').textContent = msg;
 }
 
-function renderDiseaseView(diseaseKey) {
+function getCurrentContextData() {
+    if (!CURRENT_DISEASE) return null;
+    const diseaseObj = APP_DATA[CURRENT_DISEASE];
+
+    // If a subtype is explicitly selected
+    if (CURRENT_SUBTYPE) {
+        // Try explicit 'subtypes' key first
+        if (diseaseObj.subtypes && diseaseObj.subtypes[CURRENT_SUBTYPE]) {
+            return diseaseObj.subtypes[CURRENT_SUBTYPE];
+        }
+        // Fallback to direct child (implicit subtype)
+        if (diseaseObj[CURRENT_SUBTYPE]) {
+            return diseaseObj[CURRENT_SUBTYPE];
+        }
+        return null;
+    }
+
+    return diseaseObj;
+}
+
+function renderDiseaseView(diseaseKey, subtypeKey = null) {
     document.getElementById('welcomeView').setAttribute('hidden', '');
     document.getElementById('diseaseView').removeAttribute('hidden');
-    document.getElementById('currentDiseaseTitle').textContent = diseaseKey;
+
+    let title = diseaseKey;
+    if (subtypeKey) title += ` -> ${subtypeKey}`;
+    document.getElementById('currentDiseaseTitle').textContent = title;
+
+    // View Header Buttons Logic
+    const headerBtns = document.querySelector('.view-header > div');
+    headerBtns.innerHTML = ''; // Clear existing buttons to rebuild based on context
+
+    // 1. Add Subtype Button (Only if we are at Top Level)
+    if (!subtypeKey) {
+        const btnAddSub = document.createElement('button');
+        btnAddSub.className = 'btn btn-secondary';
+        btnAddSub.style.marginRight = "8px"; // Spacing
+        btnAddSub.textContent = "+ Add Subtype";
+        btnAddSub.onclick = promptAddSubtype;
+        headerBtns.appendChild(btnAddSub);
+    }
+
+    // 2. Add Phase Button
+    const btnAddPhase = document.createElement('button');
+    btnAddPhase.className = 'btn btn-secondary';
+    btnAddPhase.textContent = "+ Add Phase";
+    btnAddPhase.onclick = promptAddPhase;
+    headerBtns.appendChild(btnAddPhase);
+
+    // 3. Delete Button
+    const btnDelete = document.createElement('button');
+    btnDelete.className = 'btn btn-danger-outline';
+    btnDelete.style.marginLeft = "8px";
+    btnDelete.textContent = subtypeKey ? "Delete Subtype" : "Delete Disease";
+    btnDelete.onclick = deleteCurrentContext;
+    headerBtns.appendChild(btnDelete);
+
 
     const container = document.getElementById('phasesContainer');
     container.innerHTML = '';
 
-    const diseaseData = APP_DATA[diseaseKey];
+    const contextData = getCurrentContextData();
+    if (!contextData) return;
 
-    // diseaseData is { "Phase Name": { goal, protocols: [] } }
-    Object.keys(diseaseData).forEach(phaseName => {
-        const phaseObj = diseaseData[phaseName];
+    // Filter out 'subtypes' key if we are at root level
+    let keys = Object.keys(contextData);
+    
+    // Structure Check
+    const mode = getStructureMode(APP_DATA[diseaseKey || CURRENT_DISEASE]);
+
+    if (!subtypeKey) {
+        // If at root level
+        if (mode === 'explicit_subtypes') {
+            keys = keys.filter(k => k !== 'subtypes');
+            
+            // If we have subtypes, we might want to prompt user to select one, 
+            // BUT if there are also direct phases (mixed), we should show them.
+            // If NO direct phases, show "Select subtype".
+            if (keys.length === 0 && contextData.subtypes && Object.keys(contextData.subtypes).length > 0) {
+                 container.innerHTML = '<div style="padding:20px; color:#666;">Select a subtype from the sidebar to view protocols.</div>';
+                 return;
+            }
+
+        } else if (mode === 'implicit_subtypes') {
+            // In implicit mode, the keys ARE the subtypes (plus maybe metadata). 
+            // We shouldn't render them as phases.
+            // If there are implicit subtypes, we just show the select message.
+            container.innerHTML = '<div style="padding:20px; color:#666;">Select a subtype from the sidebar to view protocols.</div>';
+            return;
+        }
+    }
+    
+    // Safety check if keys empty (and didn't return above)
+    if (keys.length === 0) {
+         container.innerHTML = '<div style="padding:20px; color:#666;">No phases found. Click "Add Phase" to start.</div>';
+    }
+
+    // contextData is { "Phase Name": { goal, protocols: [] } }
+    keys.forEach(phaseName => {
+        const phaseObj = contextData[phaseName];
 
         // Handle variations where phase might be just array (legacy structure support)
         const protocols = Array.isArray(phaseObj) ? phaseObj : (phaseObj.protocols || []);
@@ -139,12 +317,15 @@ function renderDiseaseView(diseaseKey) {
                     <small style="color:#666">${protocols.length} protocols</small>
                 </div>
                 <div>
-                    <button class="btn-phase-actions" onclick="editPhaseMeta('${diseaseKey}', '${phaseName}')">Edit Goal</button>
-                    <button class="btn-phase-actions" style="color:var(--risk)" onclick="deletePhase('${diseaseKey}', '${phaseName}')">Delete Phase</button>
-                    <button class="btn btn-sm btn-primary" onclick="addNewProtocol('${diseaseKey}', '${phaseName}')">+ Add Protocol</button>
+                    <button class="btn-phase-actions" onclick="renamePhase('${phaseName}')">Edit Phase</button>
+                    <button class="btn-phase-actions" style="color:var(--risk)" onclick="deletePhase('${phaseName}')">Delete Phase</button>
+                    <button class="btn btn-sm btn-primary" onclick="addNewProtocol('${phaseName}')">+ Add Protocol</button>
                 </div>
             </div>
-            ${goal ? `<p style="font-style:italic; margin-bottom:12px; color:#555;">Goal: ${goal}</p>` : ''}
+            <div style="margin-bottom:12px; color:#555; display:flex; align-items:center; gap:8px;">
+                <p style="font-style:italic; margin:0;">Goal: ${goal || '<span style="opacity:0.6">(No goal set)</span>'}</p>
+                <button class="btn-ghost" style="padding:2px 6px; font-size:0.8rem;" onclick="editPhaseGoal('${phaseName}')" title="Edit Goal">✏️</button>
+            </div>
             <div class="protocols-list"></div>
         `;
 
@@ -159,13 +340,13 @@ function renderDiseaseView(diseaseKey) {
             item.innerHTML = `
                 <div class="protocol-header">
                     <span class="protocol-title">${protocol.protocolName || "Unnamed Protocol"}</span>
-                    <button class="btn-ghost" style="padding:4px;" onclick="event.stopPropagation(); deleteProtocol('${diseaseKey}', '${phaseName}', ${idx})">🗑️</button>
+                    <button class="btn-ghost" style="padding:4px;" onclick="event.stopPropagation(); deleteProtocol('${phaseName}', ${idx})">🗑️</button>
                 </div>
                 <div class="drug-preview">${drugs || "No drugs listed"}</div>
                 <div style="font-size:0.8rem; margin-top:6px; color:#888;">Source: ${protocol.source || "—"}</div>
             `;
 
-            item.onclick = () => openProtocolModal(protocol, diseaseKey, phaseName, idx);
+            item.onclick = () => openProtocolModal(protocol, phaseName, idx);
             list.appendChild(item);
         });
 
@@ -173,16 +354,54 @@ function renderDiseaseView(diseaseKey) {
     });
 }
 
-function promptAddPhase() {
+function promptAddSubtype() {
     if (!CURRENT_DISEASE) return;
+    const diseaseObj = APP_DATA[CURRENT_DISEASE];
+    const mode = getStructureMode(diseaseObj);
+
+    const name = prompt(`Enter new Subtype for ${CURRENT_DISEASE} (e.g. 't-ALL'):`);
+    if (!name) return;
+
+    if (mode === 'implicit_subtypes') {
+        // Add as direct child
+        if (!diseaseObj[name]) {
+            diseaseObj[name] = {};
+            CURRENT_SUBTYPE = name;
+            renderDiseaseList();
+            renderDiseaseView(CURRENT_DISEASE, CURRENT_SUBTYPE);
+            markUnsaved();
+        } else {
+            alert("Subtype already exists.");
+        }
+    } else {
+        // Default / Explicit
+        if (!diseaseObj.subtypes) {
+            diseaseObj.subtypes = {};
+        }
+        if (!diseaseObj.subtypes[name]) {
+            diseaseObj.subtypes[name] = {};
+            CURRENT_SUBTYPE = name;
+            renderDiseaseList();
+            renderDiseaseView(CURRENT_DISEASE, CURRENT_SUBTYPE);
+            markUnsaved();
+        } else {
+             alert("Subtype already exists.");
+        }
+    }
+}
+
+function promptAddPhase() {
+    const contextData = getCurrentContextData();
+    if (!contextData) return;
+
     const name = prompt("Enter new Phase Name (e.g. 'Induction'):");
     if (name) {
-        if (!APP_DATA[CURRENT_DISEASE][name]) {
-            APP_DATA[CURRENT_DISEASE][name] = {
+        if (!contextData[name]) {
+            contextData[name] = {
                 goal: "",
                 protocols: []
             };
-            renderDiseaseView(CURRENT_DISEASE);
+            renderDiseaseView(CURRENT_DISEASE, CURRENT_SUBTYPE);
             markUnsaved();
         } else {
             alert("Phase already exists.");
@@ -190,47 +409,105 @@ function promptAddPhase() {
     }
 }
 
-function editPhaseMeta(disease, phase) {
-    const currentGoal = APP_DATA[disease][phase].goal || "";
+function editPhaseGoal(phase) {
+    const contextData = getCurrentContextData();
+    const currentGoal = contextData[phase].goal || "";
     const newGoal = prompt(`Edit Goal for ${phase}:`, currentGoal);
     if (newGoal !== null) {
-        APP_DATA[disease][phase].goal = newGoal;
-        renderDiseaseView(disease);
+        contextData[phase].goal = newGoal;
+        renderDiseaseView(CURRENT_DISEASE, CURRENT_SUBTYPE);
         markUnsaved();
     }
 }
 
-function deleteCurrentDisease() {
+function deleteCurrentContext() {
     if (!CURRENT_DISEASE) return;
-    if (confirm(`Are you sure you want to delete ${CURRENT_DISEASE}? This cannot be undone.`)) {
-        delete APP_DATA[CURRENT_DISEASE];
-        CURRENT_DISEASE = null;
-        renderDiseaseList();
-        showWelcome("Disease Deleted.");
-        markUnsaved();
+
+    if (CURRENT_SUBTYPE) {
+        // Delete Subtype
+        if (confirm(`Are you sure you want to delete subtype '${CURRENT_SUBTYPE}'?`)) {
+            const diseaseObj = APP_DATA[CURRENT_DISEASE];
+            const mode = getStructureMode(diseaseObj);
+            
+            if (mode === 'implicit_subtypes') {
+                delete diseaseObj[CURRENT_SUBTYPE];
+            } else {
+                if (diseaseObj.subtypes) delete diseaseObj.subtypes[CURRENT_SUBTYPE];
+            }
+            
+            CURRENT_SUBTYPE = null;
+            renderDiseaseList();
+            renderDiseaseView(CURRENT_DISEASE); // Go back to parent
+            markUnsaved();
+        }
+    } else {
+        // Delete Disease
+        if (confirm(`Are you sure you want to delete disease '${CURRENT_DISEASE}'? This cannot be undone.`)) {
+            delete APP_DATA[CURRENT_DISEASE];
+            CURRENT_DISEASE = null;
+            CURRENT_SUBTYPE = null;
+            renderDiseaseList();
+            showWelcome("Disease Deleted.");
+            markUnsaved();
+        }
     }
 }
 
-function deletePhase(disease, phase) {
+function renamePhase(oldName) {
+    const contextData = getCurrentContextData();
+    const newName = prompt("Rename Phase:", oldName);
+    if (!newName || newName === oldName) return;
+
+    if (contextData[newName]) {
+        alert("Phase name already exists!");
+        return;
+    }
+
+    const newPhaseData = {};
+    // Preserve order while renaming
+    Object.keys(contextData).forEach(key => {
+        if (key === oldName) {
+            newPhaseData[newName] = contextData[oldName];
+        } else {
+            newPhaseData[key] = contextData[key];
+        }
+    });
+
+    // Replace properties in the original object (can't just reassign local var contextData)
+    // We need to clear and refill contextData or reassign in parent. 
+    // Since contextData is a reference to the inner object, we can modify it directly if we didn't change the object reference itself.
+    // Wait, `newPhaseData` is a new object. We need to replace content of contextData.
+
+    // Simplest way: delete all keys and re-add.
+    Object.keys(contextData).forEach(k => delete contextData[k]);
+    Object.assign(contextData, newPhaseData);
+
+    renderDiseaseView(CURRENT_DISEASE, CURRENT_SUBTYPE);
+    markUnsaved();
+}
+
+function deletePhase(phase) {
+    const contextData = getCurrentContextData();
     if (confirm(`Delete phase '${phase}'?`)) {
-        delete APP_DATA[disease][phase];
-        renderDiseaseView(disease);
+        delete contextData[phase];
+        renderDiseaseView(CURRENT_DISEASE, CURRENT_SUBTYPE);
         markUnsaved();
     }
 }
 
-function deleteProtocol(disease, phase, index) {
+function deleteProtocol(phase, index) {
     if (confirm("Delete this protocol?")) {
-        const protocols = getProtocolsArray(disease, phase);
+        const protocols = getProtocolsArray(phase);
         protocols.splice(index, 1);
-        renderDiseaseView(disease);
+        renderDiseaseView(CURRENT_DISEASE, CURRENT_SUBTYPE);
         markUnsaved();
     }
 }
 
 // Helper to get protocols array safely
-function getProtocolsArray(disease, phase) {
-    const obj = APP_DATA[disease][phase];
+function getProtocolsArray(phase) {
+    const contextData = getCurrentContextData();
+    const obj = contextData[phase];
     if (Array.isArray(obj)) return obj;
     return obj.protocols;
 }
@@ -238,22 +515,25 @@ function getProtocolsArray(disease, phase) {
 // =========================================================
 // 4. EDIT/ADD PROTOCOL MODAL
 // =========================================================
-let currentEditContext = null; // { disease, phase, index (null if new) }
+let currentEditContext = null; // { phase, index, protocol } (disease/subtype implied by global state)
 
-function addNewProtocol(disease, phase) {
+function addNewProtocol(phase) {
     const newProtocol = {
         protocolName: "New Protocol",
         drugs: [],
         NursesInfo: [],
         source: ""
     };
-    openProtocolModal(newProtocol, disease, phase, null);
+    openProtocolModal(newProtocol, phase, null);
 }
 
-function openProtocolModal(protocol, disease, phase, index) {
-    currentEditContext = { disease, phase, index, protocol: JSON.parse(JSON.stringify(protocol)) };
+function openProtocolModal(protocol, phase, index) {
+    // Save current global state in context so we know where we are editing
+    // Actually we rely on `getProtocolsArray(phase)` which relies on CURRENT_DISEASE/SUBTYPE
+    currentEditContext = { phase, index, protocol: JSON.parse(JSON.stringify(protocol)) };
 
     const modal = document.getElementById('modal');
+
     modal.classList.add('open');
     document.getElementById('modalTitle').textContent = index === null ? "Add Protocol" : "Edit Protocol";
 
@@ -282,7 +562,7 @@ function renderProtocolForm(p) {
         </div>
         
         <div class="form-group">
-            <label>Drugs <button class="btn btn-sm btn-secondary" onclick="addDrugRow()">+ Add Drug</button></label>
+            <label style="display:flex; justify-content:space-between; align-items:center;">Drugs<button class="btn-insert" onclick="insertDrugRow()" style="width:auto; height:auto; border-radius:8px; padding:5px 12px; margin-right:10px; font-size:0.9rem;">+ Add Drug</button></label>
             <div class="drug-edit-list" id="drugEditList"></div>
         </div>
 
@@ -307,13 +587,15 @@ function renderDrugsList(drugs) {
     drugs.forEach((d, i) => {
         const row = document.createElement('div');
         row.className = 'drug-edit-item';
-        // Add specific note field in a new row for visibility
+
         row.innerHTML = `
             <input type="text" placeholder="Name" class="form-control" value="${d.name || ''}" onchange="updateDrug(${i}, 'name', this.value)">
             <input type="text" placeholder="Dose" class="form-control" value="${d.dose || ''}" onchange="updateDrug(${i}, 'dose', this.value)">
             <input type="text" placeholder="Route" class="form-control" value="${d.route || ''}" onchange="updateDrug(${i}, 'route', this.value)">
             <button class="btn-remove" onclick="removeDrug(${i})">×</button>
-            <input type="text" placeholder="Day (e.g. Day 1-3)" class="form-control" style="grid-column: 1 / -2" value="${d.day || ''}" onchange="updateDrug(${i}, 'day', this.value)">
+            <button class="btn-insert" onclick="insertDrugRow(${i})" title="Insert row below">+</button>
+            <input type="text" placeholder="Day (e.g. Day 1-3)" class="form-control" style="grid-column: 1 / 3" value="${d.day || ''}" onchange="updateDrug(${i}, 'day', this.value)">
+            <input type="text" placeholder="Duration" class="form-control" style="grid-column: 3 / 5" value="${d.duration || ''}" onchange="updateDrug(${i}, 'duration', this.value)">
             <select class="form-control" onchange="updateDrug(${i}, 'phase', this.value)">
                 <option value="Pre-Chemo" ${d.phase === 'Pre-Chemo' ? 'selected' : ''}>Pre-Chemo</option>
                 <option value="Chemo" ${d.phase === 'Chemo' ? 'selected' : ''}>Chemo</option>
@@ -327,10 +609,11 @@ function renderDrugsList(drugs) {
 }
 
 // Global scope helpers for inline events
-window.addDrugRow = () => {
+
+window.insertDrugRow = (idx) => {
     if (!currentEditContext) return;
-    currentEditContext.protocol.drugs = currentEditContext.protocol.drugs || [];
-    currentEditContext.protocol.drugs.push({ name: "", dose: "", route: "", phase: "Chemo", day: "", note: "" });
+    const newDrug = { name: "", dose: "", route: "", phase: "Chemo", day: "", duration: "", note: "" };
+    currentEditContext.protocol.drugs.splice(idx + 1, 0, newDrug);
     renderDrugsList(currentEditContext.protocol.drugs);
 };
 
@@ -358,8 +641,8 @@ function saveProtocolFromModal() {
     p.NursesInfo = nurseText.split('\n').map(l => l.trim()).filter(Boolean);
 
     // Context
-    const { disease, phase, index } = currentEditContext;
-    const protocolsList = getProtocolsArray(disease, phase);
+    const { phase, index } = currentEditContext;
+    const protocolsList = getProtocolsArray(phase);
 
     if (index === null) {
         // Add new
@@ -370,7 +653,7 @@ function saveProtocolFromModal() {
     }
 
     closeModal();
-    renderDiseaseView(disease);
+    renderDiseaseView(CURRENT_DISEASE, CURRENT_SUBTYPE);
     markUnsaved();
 }
 
@@ -390,9 +673,11 @@ function downloadJSON() {
 
     const a = document.createElement('a');
     a.href = url;
-    a.download = "updated_chemoProtocols.json";
+    a.download = "chemoProtocols.json";
     document.body.appendChild(a);
     a.click();
+
+    hasUnsavedChanges = false;
 
     // Cleanup
     setTimeout(() => {
@@ -411,6 +696,7 @@ function downloadJSON() {
 }
 
 function markUnsaved() {
+    hasUnsavedChanges = true;
     const el = document.getElementById('saveStatus');
     el.textContent = "Unsaved changes (click Download)";
     el.style.color = "#dc3545";

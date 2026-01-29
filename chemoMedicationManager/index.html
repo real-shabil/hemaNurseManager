@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chemo Medication Manager</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 
@@ -21,25 +21,25 @@
 
         <!-- Sidebar / Navigation -->
         <aside class="sidebar">
-            <div class="card" style="margin-bottom: 20px;">
+            <div class="card mb-20">
                 <h3>📂 Load Data</h3>
-                <p style="font-size:0.85rem; color:#666; margin-bottom:10px;">Select your
+                <p class="text-sm text-gray mb-10">Select your
                     <code>chemoMedications.json</code> file.
                 </p>
-                <input type="file" id="jsonFileInput" accept=".json" class="form-control" style="font-size:0.8rem;">
+                <input type="file" id="jsonFileInput" accept=".json" class="form-control text-xs">
             </div>
 
-            <div class="card" id="navCard" style="opacity: 0.5; pointer-events: none;">
+            <div class="card opacity-50 pointer-events-none" id="navCard">
                 <h3>Categories</h3>
                 <ul id="categoryList">
-                    <!-- Populated by JS -->
+
                 </ul>
             </div>
 
-            <div class="card" style="margin-top: 20px;">
+            <div class="card mt-20">
                 <button class="btn btn-success" id="downloadBtn" disabled>💾 Download JSON</button>
                 <p class="save-status" id="saveStatus"></p>
-                <p style="font-size:0.8rem; color:#666; margin-top:5px;">
+                <p class="text-xs text-gray mt-5">
                     Saves <code>updated_chemoMedications.json</code> to your downloads.
                 </p>
             </div>
@@ -48,7 +48,7 @@
         <!-- Main Content Area -->
         <section class="content">
             <div id="welcomeView">
-                <div class="card empty-state" style="text-align:center; padding: 40px;">
+                <div class="card empty-state">
                     <h2>Welcome</h2>
                     <p>Please load a valid JSON file to manage chemotherapy medications.</p>
                 </div>
@@ -83,7 +83,7 @@
                     <input type="text" id="editName" class="form-control">
                 </div>
 
-                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px;">
+                <div class="grid-2">
                     <div class="form-group">
                         <label>Classification</label>
                         <input type="text" id="editClass" class="form-control">
@@ -100,6 +100,7 @@
                         <option value="Non-vesicant">Non-vesicant</option>
                         <option value="Irritant">Irritant</option>
                         <option value="Vesicant">Vesicant</option>
+                        <option value="N/A Oral">N/A Oral</option>
                     </select>
                 </div>
 
@@ -131,6 +132,24 @@
                 <div class="form-group">
                     <label>Nursing Info (One per line)</label>
                     <textarea id="editNursingInfo" class="form-control"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Premedications (Format: Drug | Route | Timing)</label>
+                    <textarea id="editPremeds" class="form-control"
+                        placeholder="e.g. Acetaminophen | PO | 30 min before"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Required Prophylaxis (Format: Type | Notes)</label>
+                    <textarea id="editProphylaxis" class="form-control"
+                        placeholder="e.g. Infection Prevention | Bactrim required"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Supportive Care (Format: Type | Notes)</label>
+                    <textarea id="editSupportive" class="form-control"
+                        placeholder="e.g. Hydration | Encourage fluids"></textarea>
                 </div>
 
                 <div class="form-group">
