@@ -126,19 +126,54 @@ function renderList() {
             const sev = getSeverity(item.compatibility);
             const sevLabel = sev === 'severe' ? 'Incompatible' : sev === 'moderate' ? 'Variable' : 'Compatible';
 
-            const tr = document.createElement('tr');
-            tr.innerHTML = `
-                <td><strong>${item.drugA}</strong> + <strong>${item.drugB}</strong></td>
-                <td><span class="severity-badge severity-${sev}">${sevLabel}</span></td>
-                <td>
-                    ${item.note || '—'}
-                    ${item.source ? `<br><small style="color:#666;">Source: ${item.source}</small>` : ''}
-                </td>
-                <td>
-                    <button class="btn btn-sm btn-secondary" onclick="openEditModal(${realIndex})">Edit</button>
-                    <button class="btn btn-sm btn-danger" onclick="deleteInteraction(${realIndex})">Delete</button>
-                </td>
-            `;
+                const tr = document.createElement('tr');
+
+            const drugTd = document.createElement('td');
+            const drugAstrong = document.createElement('strong');
+            drugAstrong.textContent = item.drugA;
+            const plusText = document.createTextNode(' + ');
+            const drugBstrong = document.createElement('strong');
+            drugBstrong.textContent = item.drugB;
+            drugTd.appendChild(drugAstrong);
+            drugTd.appendChild(plusText);
+            drugTd.appendChild(drugBstrong);
+
+            const sevTd = document.createElement('td');
+            const sevSpan = document.createElement('span');
+            sevSpan.className = `severity-badge severity-${sev}`;
+            sevSpan.textContent = sevLabel;
+            sevTd.appendChild(sevSpan);
+
+            const noteTd = document.createElement('td');
+            noteTd.textContent = item.note || '—';
+            if (item.source) {
+                const sourceBr = document.createElement('br');
+                const sourceSmall = document.createElement('small');
+                sourceSmall.style.color = '#666';
+                sourceSmall.textContent = `Source: ${item.source}`;
+                noteTd.appendChild(sourceBr);
+                noteTd.appendChild(sourceSmall);
+            }
+
+            const actionsTd = document.createElement('td');
+            const editButton = document.createElement('button');
+            editButton.className = 'btn btn-sm btn-secondary';
+            editButton.type = 'button';
+            editButton.textContent = 'Edit';
+            editButton.addEventListener('click', () => openEditModal(realIndex));
+
+            const deleteButton = document.createElement('button');
+            deleteButton.className = 'btn btn-sm btn-danger';
+            deleteButton.type = 'button';
+            deleteButton.textContent = 'Delete';
+            deleteButton.addEventListener('click', () => deleteInteraction(realIndex));
+
+            actionsTd.appendChild(editButton);
+            actionsTd.appendChild(deleteButton);
+            tr.appendChild(drugTd);
+            tr.appendChild(sevTd);
+            tr.appendChild(noteTd);
+            tr.appendChild(actionsTd);
             tbody.appendChild(tr);
         });
     }
@@ -352,7 +387,13 @@ function updateDrugDatalist() {
 
     const sortedDrugs = Array.from(drugs).sort();
     const datalist = document.getElementById('drugList');
-    datalist.innerHTML = sortedDrugs.map(d => `<option value="${d}">`).join('');
+    datalist.innerHTML = '';
+
+    sortedDrugs.forEach(d => {
+        const option = document.createElement('option');
+        option.value = d;
+        datalist.appendChild(option);
+    });
 }
 
 function markUnsaved() {

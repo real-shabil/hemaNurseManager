@@ -106,7 +106,11 @@ function renderDiseaseList() {
     list.innerHTML = '';
 
     if (!APP_DATA || Object.keys(APP_DATA).length === 0) {
-        list.innerHTML = '<li style="color:#666; font-style:italic;">No diseases found.</li>';
+        const emptyItem = document.createElement('li');
+        emptyItem.style.color = '#666';
+        emptyItem.style.fontStyle = 'italic';
+        emptyItem.textContent = 'No diseases found.';
+        list.appendChild(emptyItem);
         return;
     }
 
@@ -222,6 +226,38 @@ function getCurrentContextData() {
     return diseaseObj;
 }
 
+function createButton(text, className, onClick) {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = className;
+    btn.textContent = text;
+    if (onClick) btn.addEventListener('click', onClick);
+    return btn;
+}
+
+function createInput(type, placeholder, value, className) {
+    const input = document.createElement('input');
+    input.type = type;
+    input.placeholder = placeholder || '';
+    input.className = className || '';
+    input.value = value || '';
+    return input;
+}
+
+function createSelect(options, selectedValue, className, onChange) {
+    const select = document.createElement('select');
+    select.className = className || '';
+    options.forEach(opt => {
+        const option = document.createElement('option');
+        option.value = opt;
+        option.textContent = opt;
+        if (opt === selectedValue) option.selected = true;
+        select.appendChild(option);
+    });
+    if (onChange) select.addEventListener('change', onChange);
+    return select;
+}
+
 function renderDiseaseView(diseaseKey, subtypeKey = null) {
     document.getElementById('welcomeView').setAttribute('hidden', '');
     document.getElementById('diseaseView').removeAttribute('hidden');
@@ -281,22 +317,31 @@ function renderDiseaseView(diseaseKey, subtypeKey = null) {
             // BUT if there are also direct phases (mixed), we should show them.
             // If NO direct phases, show "Select subtype".
             if (keys.length === 0 && contextData.subtypes && Object.keys(contextData.subtypes).length > 0) {
-                 container.innerHTML = '<div style="padding:20px; color:#666;">Select a subtype from the sidebar to view protocols.</div>';
-                 return;
+                const msg = document.createElement('div');
+                msg.style.padding = '20px';
+                msg.style.color = '#666';
+                msg.textContent = 'Select a subtype from the sidebar to view protocols.';
+                container.appendChild(msg);
+                return;
             }
 
         } else if (mode === 'implicit_subtypes') {
-            // In implicit mode, the keys ARE the subtypes (plus maybe metadata). 
-            // We shouldn't render them as phases.
-            // If there are implicit subtypes, we just show the select message.
-            container.innerHTML = '<div style="padding:20px; color:#666;">Select a subtype from the sidebar to view protocols.</div>';
+            const msg = document.createElement('div');
+            msg.style.padding = '20px';
+            msg.style.color = '#666';
+            msg.textContent = 'Select a subtype from the sidebar to view protocols.';
+            container.appendChild(msg);
             return;
         }
     }
     
     // Safety check if keys empty (and didn't return above)
     if (keys.length === 0) {
-         container.innerHTML = '<div style="padding:20px; color:#666;">No phases found. Click "Add Phase" to start.</div>';
+        const msg = document.createElement('div');
+        msg.style.padding = '20px';
+        msg.style.color = '#666';
+        msg.textContent = 'No phases found. Click "Add Phase" to start.';
+        container.appendChild(msg);
     }
 
     // contextData is { "Phase Name": { goal, protocols: [] } }
@@ -310,46 +355,103 @@ function renderDiseaseView(diseaseKey, subtypeKey = null) {
         const phaseBlock = document.createElement('div');
         phaseBlock.className = 'phase-block';
 
-        phaseBlock.innerHTML = `
-            <div class="phase-header">
-                <div>
-                    <h3>${phaseName}</h3>
-                    <small style="color:#666">${protocols.length} protocols</small>
-                </div>
-                <div>
-                    <button class="btn-phase-actions" onclick="renamePhase('${phaseName}')">Edit Phase</button>
-                    <button class="btn-phase-actions" style="color:var(--risk)" onclick="deletePhase('${phaseName}')">Delete Phase</button>
-                    <button class="btn btn-sm btn-primary" onclick="addNewProtocol('${phaseName}')">+ Add Protocol</button>
-                </div>
-            </div>
-            <div style="margin-bottom:12px; color:#555; display:flex; align-items:center; gap:8px;">
-                <p style="font-style:italic; margin:0;">Goal: ${goal || '<span style="opacity:0.6">(No goal set)</span>'}</p>
-                <button class="btn-ghost" style="padding:2px 6px; font-size:0.8rem;" onclick="editPhaseGoal('${phaseName}')" title="Edit Goal">✏️</button>
-            </div>
-            <div class="protocols-list"></div>
-        `;
+        const phaseHeader = document.createElement('div');
+        phaseHeader.className = 'phase-header';
 
-        const list = phaseBlock.querySelector('.protocols-list');
+        const titleGroup = document.createElement('div');
+        const heading = document.createElement('h3');
+        heading.textContent = phaseName;
+        const countLabel = document.createElement('small');
+        countLabel.style.color = '#666';
+        countLabel.textContent = `${protocols.length} protocols`;
+        titleGroup.appendChild(heading);
+        titleGroup.appendChild(countLabel);
+
+        const actionGroup = document.createElement('div');
+        const renameBtn = createButton('Edit Phase', 'btn-phase-actions', () => renamePhase(phaseName));
+        const deleteBtn = createButton('Delete Phase', 'btn-phase-actions', () => deletePhase(phaseName));
+        deleteBtn.style.color = 'var(--risk)';
+        const addProtocolBtn = createButton('+ Add Protocol', 'btn btn-sm btn-primary', () => addNewProtocol(phaseName));
+
+        actionGroup.appendChild(renameBtn);
+        actionGroup.appendChild(deleteBtn);
+        actionGroup.appendChild(addProtocolBtn);
+
+        phaseHeader.appendChild(titleGroup);
+        phaseHeader.appendChild(actionGroup);
+        phaseBlock.appendChild(phaseHeader);
+
+        const goalRow = document.createElement('div');
+        goalRow.style.marginBottom = '12px';
+        goalRow.style.color = '#555';
+        goalRow.style.display = 'flex';
+        goalRow.style.alignItems = 'center';
+        goalRow.style.gap = '8px';
+
+        const goalText = document.createElement('p');
+        goalText.style.fontStyle = 'italic';
+        goalText.style.margin = '0';
+        if (goal) {
+            goalText.textContent = `Goal: ${goal}`;
+        } else {
+            goalText.textContent = 'Goal: ';
+            const placeholder = document.createElement('span');
+            placeholder.style.opacity = '0.6';
+            placeholder.textContent = '(No goal set)';
+            goalText.appendChild(placeholder);
+        }
+
+        const editGoalBtn = createButton('✏️', 'btn-ghost', () => editPhaseGoal(phaseName));
+        editGoalBtn.style.padding = '2px 6px';
+        editGoalBtn.style.fontSize = '0.8rem';
+        editGoalBtn.title = 'Edit Goal';
+
+        goalRow.appendChild(goalText);
+        goalRow.appendChild(editGoalBtn);
+        phaseBlock.appendChild(goalRow);
+
+        const list = document.createElement('div');
+        list.className = 'protocols-list';
+
         protocols.forEach((protocol, idx) => {
             const item = document.createElement('div');
             item.className = 'protocol-item';
 
-            // Preview drugs
+            const protocolHeader = document.createElement('div');
+            protocolHeader.className = 'protocol-header';
+
+            const titleSpan = document.createElement('span');
+            titleSpan.className = 'protocol-title';
+            titleSpan.textContent = protocol.protocolName || 'Unnamed Protocol';
+
+            const deleteProtocolBtn = createButton('🗑️', 'btn-ghost', (e) => {
+                e.stopPropagation();
+                deleteProtocol(phaseName, idx);
+            });
+            deleteProtocolBtn.style.padding = '4px';
+
+            protocolHeader.appendChild(titleSpan);
+            protocolHeader.appendChild(deleteProtocolBtn);
+
+            const preview = document.createElement('div');
+            preview.className = 'drug-preview';
             const drugs = (protocol.drugs || []).map(d => d.name).join(', ');
+            preview.textContent = drugs || 'No drugs listed';
 
-            item.innerHTML = `
-                <div class="protocol-header">
-                    <span class="protocol-title">${protocol.protocolName || "Unnamed Protocol"}</span>
-                    <button class="btn-ghost" style="padding:4px;" onclick="event.stopPropagation(); deleteProtocol('${phaseName}', ${idx})">🗑️</button>
-                </div>
-                <div class="drug-preview">${drugs || "No drugs listed"}</div>
-                <div style="font-size:0.8rem; margin-top:6px; color:#888;">Source: ${protocol.source || "—"}</div>
-            `;
+            const sourceDiv = document.createElement('div');
+            sourceDiv.style.fontSize = '0.8rem';
+            sourceDiv.style.marginTop = '6px';
+            sourceDiv.style.color = '#888';
+            sourceDiv.textContent = `Source: ${protocol.source || '—'}`;
 
-            item.onclick = () => openProtocolModal(protocol, phaseName, idx);
+            item.appendChild(protocolHeader);
+            item.appendChild(preview);
+            item.appendChild(sourceDiv);
+            item.addEventListener('click', () => openProtocolModal(protocol, phaseName, idx));
             list.appendChild(item);
         });
 
+        phaseBlock.appendChild(list);
         container.appendChild(phaseBlock);
     });
 }
@@ -551,26 +653,63 @@ function closeModal() {
 
 function renderProtocolForm(p) {
     const body = document.getElementById('modalBody');
-    body.innerHTML = `
-        <div class="form-group">
-            <label>Protocol Name</label>
-            <input type="text" class="form-control" id="editProtoName" value="${p.protocolName || ''}">
-        </div>
-        <div class="form-group">
-            <label>Source</label>
-            <input type="text" class="form-control" id="editProtoSource" value="${p.source || ''}">
-        </div>
-        
-        <div class="form-group">
-            <label style="display:flex; justify-content:space-between; align-items:center;">Drugs<button class="btn-insert" onclick="insertDrugRow()" style="width:auto; height:auto; border-radius:8px; padding:5px 12px; margin-right:10px; font-size:0.9rem;">+ Add Drug</button></label>
-            <div class="drug-edit-list" id="drugEditList"></div>
-        </div>
+    body.innerHTML = '';
 
-        <div class="form-group">
-            <label>Nurse's Info (One per line)</label>
-            <textarea class="form-control" id="editNurseInfo">${(p.NursesInfo || []).join('\n')}</textarea>
-        </div>
-    `;
+    const protocolGroup = document.createElement('div');
+    protocolGroup.className = 'form-group';
+    const protocolLabel = document.createElement('label');
+    protocolLabel.textContent = 'Protocol Name';
+    const protocolInput = createInput('text', '', p.protocolName || '', 'form-control');
+    protocolInput.id = 'editProtoName';
+    protocolGroup.appendChild(protocolLabel);
+    protocolGroup.appendChild(protocolInput);
+
+    const sourceGroup = document.createElement('div');
+    sourceGroup.className = 'form-group';
+    const sourceLabel = document.createElement('label');
+    sourceLabel.textContent = 'Source';
+    const sourceInput = createInput('text', '', p.source || '', 'form-control');
+    sourceInput.id = 'editProtoSource';
+    sourceGroup.appendChild(sourceLabel);
+    sourceGroup.appendChild(sourceInput);
+
+    const drugsGroup = document.createElement('div');
+    drugsGroup.className = 'form-group';
+    const drugsLabel = document.createElement('label');
+    drugsLabel.style.display = 'flex';
+    drugsLabel.style.justifyContent = 'space-between';
+    drugsLabel.style.alignItems = 'center';
+    drugsLabel.textContent = 'Drugs';
+    const addDrugBtn = createButton('+ Add Drug', 'btn-insert', () => insertDrugRow());
+    addDrugBtn.style.width = 'auto';
+    addDrugBtn.style.height = 'auto';
+    addDrugBtn.style.borderRadius = '8px';
+    addDrugBtn.style.padding = '5px 12px';
+    addDrugBtn.style.marginRight = '10px';
+    addDrugBtn.style.fontSize = '0.9rem';
+    drugsLabel.appendChild(addDrugBtn);
+
+    const drugEditList = document.createElement('div');
+    drugEditList.className = 'drug-edit-list';
+    drugEditList.id = 'drugEditList';
+    drugsGroup.appendChild(drugsLabel);
+    drugsGroup.appendChild(drugEditList);
+
+    const nurseGroup = document.createElement('div');
+    nurseGroup.className = 'form-group';
+    const nurseLabel = document.createElement('label');
+    nurseLabel.textContent = "Nurse's Info (One per line)";
+    const nurseTextArea = document.createElement('textarea');
+    nurseTextArea.className = 'form-control';
+    nurseTextArea.id = 'editNurseInfo';
+    nurseTextArea.value = (p.NursesInfo || []).join('\n');
+    nurseGroup.appendChild(nurseLabel);
+    nurseGroup.appendChild(nurseTextArea);
+
+    body.appendChild(protocolGroup);
+    body.appendChild(sourceGroup);
+    body.appendChild(drugsGroup);
+    body.appendChild(nurseGroup);
 
     renderDrugsList(p.drugs || []);
 }
@@ -579,8 +718,13 @@ function renderDrugsList(drugs) {
     const container = document.getElementById('drugEditList');
     container.innerHTML = '';
 
-    if (drugs.length === 0) {
-        container.innerHTML = '<div style="color:#888; text-align:center; padding:10px;">No drugs added</div>';
+    if (!drugs || drugs.length === 0) {
+        const message = document.createElement('div');
+        message.style.color = '#888';
+        message.style.textAlign = 'center';
+        message.style.padding = '10px';
+        message.textContent = 'No drugs added';
+        container.appendChild(message);
         return;
     }
 
@@ -588,22 +732,43 @@ function renderDrugsList(drugs) {
         const row = document.createElement('div');
         row.className = 'drug-edit-item';
 
-        row.innerHTML = `
-            <input type="text" placeholder="Name" class="form-control" value="${d.name || ''}" onchange="updateDrug(${i}, 'name', this.value)">
-            <input type="text" placeholder="Dose" class="form-control" value="${d.dose || ''}" onchange="updateDrug(${i}, 'dose', this.value)">
-            <input type="text" placeholder="Route" class="form-control" value="${d.route || ''}" onchange="updateDrug(${i}, 'route', this.value)">
-            <button class="btn-remove" onclick="removeDrug(${i})">×</button>
-            <button class="btn-insert" onclick="insertDrugRow(${i})" title="Insert row below">+</button>
-            <input type="text" placeholder="Day (e.g. Day 1-3)" class="form-control" style="grid-column: 1 / 3" value="${d.day || ''}" onchange="updateDrug(${i}, 'day', this.value)">
-            <input type="text" placeholder="Duration" class="form-control" style="grid-column: 3 / 5" value="${d.duration || ''}" onchange="updateDrug(${i}, 'duration', this.value)">
-            <select class="form-control" onchange="updateDrug(${i}, 'phase', this.value)">
-                <option value="Pre-Chemo" ${d.phase === 'Pre-Chemo' ? 'selected' : ''}>Pre-Chemo</option>
-                <option value="Chemo" ${d.phase === 'Chemo' ? 'selected' : ''}>Chemo</option>
-                <option value="Post-Chemo" ${d.phase === 'Post-Chemo' ? 'selected' : ''}>Post-Chemo</option>
-                <option value="Other" ${!['Pre-Chemo', 'Chemo', 'Post-Chemo'].includes(d.phase) ? 'selected' : ''}>Other</option>
-            </select>
-            <input type="text" placeholder="Specific Note (e.g. Check pH > 7)" class="form-control" style="grid-column: 1 / -1" value="${d.note || ''}" onchange="updateDrug(${i}, 'note', this.value)">
-        `;
+        const nameInput = createInput('text', 'Name', d.name || '', 'form-control');
+        nameInput.addEventListener('input', (e) => updateDrug(i, 'name', e.target.value));
+
+        const doseInput = createInput('text', 'Dose', d.dose || '', 'form-control');
+        doseInput.addEventListener('input', (e) => updateDrug(i, 'dose', e.target.value));
+
+        const routeInput = createInput('text', 'Route', d.route || '', 'form-control');
+        routeInput.addEventListener('input', (e) => updateDrug(i, 'route', e.target.value));
+
+        const removeBtn = createButton('×', 'btn-remove', () => removeDrug(i));
+        const insertBtn = createButton('+', 'btn-insert', () => insertDrugRow(i));
+        insertBtn.title = 'Insert row below';
+
+        const dayInput = createInput('text', 'Day (e.g. Day 1-3)', d.day || '', 'form-control');
+        dayInput.style.gridColumn = '1 / 3';
+        dayInput.addEventListener('input', (e) => updateDrug(i, 'day', e.target.value));
+
+        const durationInput = createInput('text', 'Duration', d.duration || '', 'form-control');
+        durationInput.style.gridColumn = '3 / 5';
+        durationInput.addEventListener('input', (e) => updateDrug(i, 'duration', e.target.value));
+
+        const phaseSelect = createSelect(['Pre-Chemo', 'Chemo', 'Post-Chemo', 'Other'], d.phase || 'Chemo', 'form-control', (e) => updateDrug(i, 'phase', e.target.value));
+
+        const noteInput = createInput('text', 'Specific Note (e.g. Check pH > 7)', d.note || '', 'form-control');
+        noteInput.style.gridColumn = '1 / -1';
+        noteInput.addEventListener('input', (e) => updateDrug(i, 'note', e.target.value));
+
+        row.appendChild(nameInput);
+        row.appendChild(doseInput);
+        row.appendChild(routeInput);
+        row.appendChild(removeBtn);
+        row.appendChild(insertBtn);
+        row.appendChild(dayInput);
+        row.appendChild(durationInput);
+        row.appendChild(phaseSelect);
+        row.appendChild(noteInput);
+
         container.appendChild(row);
     });
 }

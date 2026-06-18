@@ -1,0 +1,122 @@
+{
+  "medications": [
+    {
+      "name": "Methotrexate",
+      "metadata": {
+        "last_updated": "2025-06-18",
+        "evidence_source": "BC Cancer Protocol"
+      },
+      "nursing_workflow": {
+        "pre_infusion_safety": {
+          "fatal_alerts": "NEVER INTRATHECAL - FATAL if given by this route. Must be dispensed in a minibag.",
+          "mandatory_checks": [
+            "Verify patient ID with two identifiers",
+            "Confirm IV patency",
+            "Baseline renal function within 7 days",
+            "Baseline CBC and liver function"
+          ],
+          "premeds": [
+            "Acetaminophen 650mg PO 30 min before",
+            "Diphenhydramine 25-50mg IV 15 min before"
+          ]
+        },
+        "during_infusion": {
+          "extravasation_management": {
+            "risk": "Vesicant",
+            "action": "Stop infusion immediately, do not remove needle. Notify physician stat.",
+            "antidote": "Hyaluronidase 150 units injected locally in 5 divided sites around extravasation area"
+          },
+          "monitoring_frequency": "Continuous observation during infusion; monitor vitals every 15 minutes",
+          "stop_criteria": [
+            "Patient reports burning, stinging, or pain at IV site",
+            "Redness, swelling, or blanching at IV site",
+            "Patient develops severe nausea/vomiting",
+            "Vital signs unstable"
+          ]
+        },
+        "post_infusion_care": {
+          "nursing_assessment": [
+            "Check IV site for signs of extravasation every 15 min for 1 hour post-infusion",
+            "Monitor fluid intake and urine output",
+            "Monitor for delayed hypersensitivity reactions (24-48 hours)",
+            "Assess mucous membranes for bleeding"
+          ],
+          "patient_education": "Drink at least 3 liters of fluid daily unless contraindicated. Report any signs of infection, bleeding, or unusual bruising to your healthcare provider immediately. Avoid NSAIDs."
+        }
+      },
+      "side_effect_triage": {
+        "report_to_physician": [
+          "Severe mucositis (difficulty eating/drinking)",
+          "WBC <2000 or platelets <50,000",
+          "Gross hematuria",
+          "Neurological symptoms (confusion, tremors)"
+        ],
+        "manage_at_bedside": [
+          "Mild nausea: provide antiemetic per protocol",
+          "Mild mucositis: use oral rinses",
+          "Low-grade fever <38.5°C: monitor closely",
+          "Mild alopecia: reassure patient"
+        ]
+      }
+    },
+    {
+      "name": "Cisplatin",
+      "metadata": {
+        "last_updated": "2025-06-15",
+        "evidence_source": "Oncology Nursing Society Guidelines"
+      },
+      "nursing_workflow": {
+        "pre_infusion_safety": {
+          "fatal_alerts": "Prehydration mandatory. Renal dysfunction and ototoxicity risk. Check baseline creatinine <1.5x normal.",
+          "mandatory_checks": [
+            "Pre-hydration with NS 1-2L over 8-12 hours",
+            "Baseline audiometry (if dose >300 mg/m²)",
+            "Baseline and ongoing magnesium levels"
+          ],
+          "premeds": [
+            "Ondansetron 8mg IV 30 min before",
+            "Dexamethasone 20mg IV 30 min before",
+            "NS 125mL/hr during infusion"
+          ]
+        },
+        "during_infusion": {
+          "extravasation_management": {
+            "risk": "Vesicant",
+            "action": "Stop infusion immediately. Apply ice to area. Notify physician.",
+            "antidote": "Sodium thiosulfate 1/6 M injected into extravasation site"
+          },
+          "monitoring_frequency": "Monitor vitals every 15 minutes during infusion; strict I&O",
+          "stop_criteria": [
+            "Evidence of extravasation",
+            "Severe nausea despite antiemetics",
+            "Tinnitus or hearing loss reported",
+            "Anaphylactic reaction signs"
+          ]
+        },
+        "post_infusion_care": {
+          "nursing_assessment": [
+            "Continue post-hydration with NS 1-2L",
+            "Monitor urine output (goal >200mL/hr for 4 hours post-infusion)",
+            "Monitor for ototoxicity (ask about hearing changes)",
+            "Check magnesium level within 24 hours"
+          ],
+          "patient_education": "You may experience some ringing in your ears or temporary hearing changes. Report this immediately. Maintain good fluid intake. Some hair loss is expected."
+        }
+      },
+      "side_effect_triage": {
+        "report_to_physician": [
+          "Severe ototoxicity (difficulty hearing)",
+          "Oliguria (urine output <100 mL in 4 hours)",
+          "Serum creatinine doubled from baseline",
+          "Severe electrolyte imbalance"
+        ],
+        "manage_at_bedside": [
+          "Nausea: continue antiemetics per schedule",
+          "Mild electrolyte changes: ensure adequate hydration",
+          "Peripheral tingling: elevate extremities",
+          "Fatigue: allow rest periods"
+        ]
+      }
+    }
+  ]
+}
